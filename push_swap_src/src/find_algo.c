@@ -132,8 +132,8 @@ void			find_algo(t_list_ps **pile_a, t_list_ps **pile_b)
 		// print_pile(pile_b);
 	}*/
 	
-	// else if (nb_node(*pile_a) <= 250)
-	// 	sort_default(pile_a, pile_b, &prev);
+	else if (nb_node(*pile_a) <= 250)
+		sort_default(pile_a, pile_b, &prev);
 	else
 		sort_big(pile_a, pile_b, &prev);
 	
