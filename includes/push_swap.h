@@ -152,13 +152,6 @@ void					push_below(t_list_ps **pile_a, t_list_ps **pile_b,
 void					sort_big(t_list_ps **pile_a, t_list_ps **pile_b, char **prev);
 
 /*
-**	quicksort.c
-*/
-
-void					quicksort(t_list_ps **pile_a, t_list_ps **pile_b, char **prev,
-						int **pivots);
-
-/*
 **	swap.c
 */
 

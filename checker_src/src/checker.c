@@ -26,6 +26,46 @@
 // 	printf("\n");
 // }
 
+char			**verbose_av(char **new_av)
+{
+	int			i;
+
+	i = 0;
+	while (new_av[i + 1])
+	{
+		new_av[i] = new_av[i + 1];
+		i++;
+	}
+	new_av[i] = NULL;
+	return(new_av);
+}
+
+// void			ft_free_av(char ***new_av)
+// {
+// 	int			i;
+
+// 	i = 0;
+// 	while (new_av[i])
+// 	{
+// 		free(new_av[i]);
+// 		i++;
+// 	}
+// 	free(new_av);
+// }
+
+// void			ft_free_piles(t_list_ps **pile_a, t_list_ps **pile_b)
+// {
+// 	t_list_ps	*temp;
+// 	while (*pile_a) {
+// 		free(*pile_a);
+// 		temp = *pile_a;
+// 		*pile_a = (*pile_a)->next;
+// 		free(temp);
+// 	}
+// 	free(*pile_a);
+// 	(void)pile_b;
+// }
+
 /*
 **	ALGO | Memo.
 **	1 = sa --> swap the first 2 elements of a
@@ -51,34 +91,34 @@ int				main(int ac, char **av)
 	t_list_ps	*pile_a;
 	t_list_ps	*pile_b;
 	char		**new_av;
+	int			error_mode;
 
-	if (ac > 1)
+	error_mode = 0;
+	if (!(ac == 1 || av[1] == NULL || !av[1] || ft_strcmp(av[1], "") == 0))
 	{
 		pile_b = NULL;
-		if (!(new_av = split_av(av)) || ft_check_error(new_av) < 1)
+		if (!(new_av = split_av(av)))
 		{
-			write(2, "Error\n", 6);
+			ft_putendl((error_mode == 0) ? "Error" : "Error: invalid arguments");
 			return (0);
 		}
-		if (!(pile_a = get_pile_a(new_av)) || sort_pile(&pile_a, &pile_b) < 1)
-		{
-			write(2, "Error\n", 6);
-			return (0);
+		else if (ft_strcmp(new_av[0], "-v") == 0) {
+			error_mode = 1;
+			new_av = verbose_av(new_av);
 		}
-		if (ft_check_sort(&pile_a, &pile_b) < 1)
-		{
-			// ft_putendl("KO");
-			// printf("\n\nFIN DU GAME CHECKER\n\npile_a : \n\n");
-			// print_pile(pile_a);
-			// printf("\n\npile_b : \n\n");
-			// print_pile(pile_b);
-			return (0);
+		if (ft_check_error(new_av) == -1)
+			ft_putendl((error_mode == 0) ? "Error" : "Error: arguments must be numbers");
+		else if (ft_check_error(new_av) == -2)
+			ft_putendl((error_mode == 0) ? "Error" : "Error: repeated arguments");
+		else if (!(pile_a = get_pile_a(new_av)) || sort_pile(&pile_a, &pile_b) < 1) {
+			ft_putendl((error_mode == 0) ? "Error" : "Error: wrong instructions");
 		}
-		ft_putendl("OK");
+		else if (ft_check_sort(&pile_a, &pile_b) >= 1) {
+			ft_putendl("OK");
+		}
+		else {
+			ft_putendl("KO");
+		}
 	}
-	// printf("\n\nFIN DU GAME CHECKER\n\npile_a : \n\n");
-	// print_pile(pile_a);
-	// printf("\n\npile_b : \n\n");
-	// print_pile(pile_b);
 	return (0);
 }

@@ -54,9 +54,6 @@ int			ft_check_error(char **av1)
 		return (0);
 	while (i < nb_arg_av(av1))
 	{
-		//if (!(av2[i] = (int)ft_memalloc(sizeof(int)))
-		//		|| !(av3[i] = (char*)ft_memalloc(sizeof(char))))
-		//	return (0);
 		av2[i] = ft_atoi(av1[i]);
 		av3[i] = ft_itoa(av2[i]);
 		if (ft_strcmp(av3[i], av1[i]) != 0)
@@ -64,6 +61,6 @@ int			ft_check_error(char **av1)
 		i++;
 	}
 	if (doublons(av2, nb_arg_av(av1)) != 1)
-		return (-1);
+		return (-2);
 	return (1);
 }

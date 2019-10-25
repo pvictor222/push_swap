@@ -14,7 +14,6 @@ SRC		= push_swap.c			\
 		  split_av.c			\
 		  check_sort.c			\
 		  push.c				\
-		  quicksort.c			\
 		  rotate.c				\
 		  swap.c				\
 		  sort_default.c		\
