@@ -26,7 +26,19 @@
 // 	printf("\n");
 // }
 
-char			**verbose_av(char **new_av)
+static int		check_trim(char *str)
+{
+	int			i;
+
+	ft_putendl("ici");
+	i = -1;
+	while (str[++i])
+		if (str[i] != ' ')
+			return (1);
+	return (-1);
+}
+
+static char		**verbose_av(char **new_av)
 {
 	int			i;
 
@@ -94,22 +106,26 @@ int				main(int ac, char **av)
 	int			error_mode;
 
 	error_mode = 0;
-	if (!(ac == 1 || av[1] == NULL || !av[1] || ft_strcmp(av[1], "") == 0))
+	if (!(ac == 1 || av[1] == NULL || !av[1] || ft_strcmp(av[1], "") == 0)
+		|| (ac == 2 && check_trim(av[1]) == -1))
 	{
 		pile_b = NULL;
 		if (!(new_av = split_av(av)))
 		{
 			ft_putendl((error_mode == 0) ? "Error" : "Error: invalid arguments");
+			free(new_av);
 			return (0);
 		}
-		else if (ft_strcmp(new_av[0], "-v") == 0) {
+		else if (check_trim(av[1]) != -1 && ft_strcmp(new_av[0], "-v") == 0) {
 			error_mode = 1;
 			new_av = verbose_av(new_av);
 		}
-		if (ft_check_error(new_av) == -1)
+		if (ft_check_error(new_av) == -1) {
 			ft_putendl((error_mode == 0) ? "Error" : "Error: arguments must be numbers");
-		else if (ft_check_error(new_av) == -2)
+		}
+		else if (ft_check_error(new_av) == -2) {
 			ft_putendl((error_mode == 0) ? "Error" : "Error: repeated arguments");
+		}
 		else if (!(pile_a = get_pile_a(new_av)) || sort_pile(&pile_a, &pile_b) < 1) {
 			ft_putendl((error_mode == 0) ? "Error" : "Error: wrong instructions");
 		}
@@ -119,6 +135,7 @@ int				main(int ac, char **av)
 		else {
 			ft_putendl("KO");
 		}
+		free(new_av);
 	}
 	return (0);
 }

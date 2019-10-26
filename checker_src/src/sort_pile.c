@@ -18,12 +18,12 @@ static int	check_algo(char *algo)
 	int		i;
 
 	i = 0;
-	while (strcmp(g_function[i].c, algo) != 0 && i < 12)
+	while (i < 12) {
+		if (strcmp(g_function[i].c, algo) == 0)
+			return (1);
 		i++;
-	if (strcmp(g_function[i].c, algo) == 0)
-		return (1);
-	else
-		return (0);
+	}
+	return (0);
 }
 
 int			sort_pile(t_list_ps **pile_a, t_list_ps **pile_b)
