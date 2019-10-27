@@ -26,11 +26,13 @@ static int	check_algo(char *algo)
 	return (0);
 }
 
-int			sort_pile(t_list_ps **pile_a, t_list_ps **pile_b)
+int			sort_pile(t_list_ps **pile_a, t_list_ps **pile_b, int mode)
 {
 	char	*algo;
 	int		i;
+	int		nb_actions;
 
+	nb_actions = 0;
 	while (get_next_line(0, &algo) == 1)
 	{
 		i = 0;
@@ -39,6 +41,12 @@ int			sort_pile(t_list_ps **pile_a, t_list_ps **pile_b)
 		while (strcmp(g_function[i].c, algo) != 0)
 			i++;
 		g_function[i].ft(pile_a, pile_b);
+		nb_actions++;
+	}
+	if (mode == 3 || mode == 5 || mode == 6 || mode == 7)
+	{
+		ft_putnbr(nb_actions);
+		ft_putendl(" movements.\n");
 	}
 	return (1);
 }

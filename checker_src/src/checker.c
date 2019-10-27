@@ -12,25 +12,10 @@
 
 #include "checker.h"
 
-
-// // Fonction pour afficher une pile, à supprimer
-// #include <stdio.h>
-// static void print_pile(t_list_ps *pile)
-// {
-// 	t_list_ps *temp = pile;
-// 	while (temp)
-// 	{
-// 		printf("%d ", (temp)->content);
-// 		temp = (temp)->next;
-// 	}
-// 	printf("\n");
-// }
-
 static int		check_trim(char *str)
 {
 	int			i;
 
-	ft_putendl("ici");
 	i = -1;
 	while (str[++i])
 		if (str[i] != ' ')
@@ -65,7 +50,7 @@ static char		**verbose_av(char **new_av)
 // 	free(new_av);
 // }
 
-// void			ft_free_piles(t_list_ps **pile_a, t_list_ps **pile_b)
+// static void		ft_free_piles(t_list_ps **pile_a, t_list_ps **pile_b)
 // {
 // 	t_list_ps	*temp;
 // 	while (*pile_a) {
@@ -77,6 +62,70 @@ static char		**verbose_av(char **new_av)
 // 	free(*pile_a);
 // 	(void)pile_b;
 // }
+
+/*
+**	Print the options if the 'h' tag is on
+*/
+
+void			print_help()
+{
+	ft_putendl("List of available options:");
+	ft_putendl("        '-h' --> help menue");
+	ft_putendl("        '-v' --> verbose mode: details the errors");
+	ft_putendl("        '-p' --> prints the unordered list of numbers");
+	ft_putendl("        '-c' --> counts the number of movements");
+}
+
+/*
+**	Print the pile given as an argument (option (-p))	
+*/
+
+static void		print_pile(char **av)
+{
+	int			i;
+
+	i = -1;
+	ft_putendl("Unordered list:");
+	while (av[++i])
+	{
+		ft_putstr(av[i]);
+		if (av[i + 1])
+			ft_putstr(" | ");
+	}
+	ft_putendl("\n");
+}
+
+
+/*
+**	Tag list:
+**	1. v --> error verbose
+**	2. p --> print the piles
+**	3. c --> count the number of movements
+**	4. vp
+**	5. vc
+**	6. pc
+**	7. vpc
+**	h --> help: displays the tag options
+*/
+
+static int		is_option(char *tag)
+{
+	int			mode;
+
+	mode = -1;
+	if (ft_strchr(tag, '-'))
+	{
+		if (ft_strchr(tag, 'v'))
+			mode = 1;
+		if (ft_strchr(tag, 'p'))
+			mode = (mode == -1) ? 2 : 4;
+		if (ft_strchr(tag, 'c'))
+			mode = (mode == -1) ? 3 : ((mode == 2) ? 6 : ((mode == 1) ? 5 : 7));
+		if (ft_strchr(tag, 'h'))
+			print_help();
+	}
+	return (mode);
+}
 
 /*
 **	ALGO | Memo.
@@ -103,37 +152,40 @@ int				main(int ac, char **av)
 	t_list_ps	*pile_a;
 	t_list_ps	*pile_b;
 	char		**new_av;
-	int			error_mode;
+	int			mode;
 
-	error_mode = 0;
+	mode = 0;
 	if (!(ac == 1 || av[1] == NULL || !av[1] || ft_strcmp(av[1], "") == 0)
 		|| (ac == 2 && check_trim(av[1]) == -1))
 	{
 		pile_b = NULL;
 		if (!(new_av = split_av(av)))
 		{
-			ft_putendl((error_mode == 0) ? "Error" : "Error: invalid arguments");
+			ft_putendl((mode == 0) ? "Error" : "Error: invalid arguments");
 			free(new_av);
 			return (0);
 		}
-		else if (check_trim(av[1]) != -1 && ft_strcmp(new_av[0], "-v") == 0) {
-			error_mode = 1;
+		else if (check_trim(av[1]) != -1 && (mode = is_option(new_av[0])) >= 1) {
 			new_av = verbose_av(new_av);
 		}
 		if (ft_check_error(new_av) == -1) {
-			ft_putendl((error_mode == 0) ? "Error" : "Error: arguments must be numbers");
+			ft_putendl((mode == 0) ? "Error" : "Error: arguments must be numbers");
 		}
 		else if (ft_check_error(new_av) == -2) {
-			ft_putendl((error_mode == 0) ? "Error" : "Error: repeated arguments");
+			ft_putendl((mode == 0) ? "Error" : "Error: repeated arguments");
 		}
-		else if (!(pile_a = get_pile_a(new_av)) || sort_pile(&pile_a, &pile_b) < 1) {
-			ft_putendl((error_mode == 0) ? "Error" : "Error: wrong instructions");
-		}
-		else if (ft_check_sort(&pile_a, &pile_b) >= 1) {
-			ft_putendl("OK");
-		}
-		else {
+		else if (!(pile_a = get_pile_a(new_av)) || sort_pile(&pile_a, &pile_b, mode) < 1)
+			ft_putendl((mode == 0) ? "Error" : "Error: wrong instructions");
+		else
+		{
+			if (mode == 2 || mode == 4 || mode == 6 || mode == 7)
+				print_pile(new_av);
+			if (ft_check_sort(&pile_a, &pile_b) >= 1) {
+				ft_putendl("OK");
+			}
+			else {
 			ft_putendl("KO");
+			}
 		}
 		free(new_av);
 	}
