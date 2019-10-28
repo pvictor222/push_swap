@@ -50,30 +50,40 @@ static char		**verbose_av(char **new_av)
 // 	free(new_av);
 // }
 
-// static void		ft_free_piles(t_list_ps **pile_a, t_list_ps **pile_b)
+static void		ft_free_piles(t_list_ps **pile_a, t_list_ps **pile_b)
+{
+	t_list_ps	*temp;
+
+	while (*pile_a) {
+		temp = *pile_a;
+		*pile_a = (*pile_a)->next;
+		free(temp);
+	}
+	free(*pile_a);
+	free(*pile_b);
+}
+
+// static void		ft_free_av(char ***av)
 // {
-// 	t_list_ps	*temp;
-// 	while (*pile_a) {
-// 		free(*pile_a);
-// 		temp = *pile_a;
-// 		*pile_a = (*pile_a)->next;
-// 		free(temp);
-// 	}
-// 	free(*pile_a);
-// 	(void)pile_b;
+// 	int			i;
+
+// 	i = -1;
+// 	while (av[++i])
+// 		ft_strdel(av[i]);
+// 	ft_strdel(av[i]);
 // }
 
 /*
 **	Print the options if the 'h' tag is on
 */
 
-void			print_help()
+static void			print_help()
 {
 	ft_putendl("List of available options:");
 	ft_putendl("        '-h' --> help menue");
 	ft_putendl("        '-v' --> verbose mode: details the errors");
 	ft_putendl("        '-p' --> prints the unordered list of numbers");
-	ft_putendl("        '-c' --> counts the number of movements");
+	ft_putendl("        '-c' --> counts the number of movements\n");
 }
 
 /*
@@ -90,7 +100,7 @@ static void		print_pile(char **av)
 	{
 		ft_putstr(av[i]);
 		if (av[i + 1])
-			ft_putstr(" | ");
+			ft_putstr(" --> ");
 	}
 	ft_putendl("\n");
 }
@@ -187,7 +197,8 @@ int				main(int ac, char **av)
 			ft_putendl("KO");
 			}
 		}
-		free(new_av);
+		// ft_free_av(&new_av);
+		ft_free_piles(&pile_a, &pile_b);
 	}
 	return (0);
 }

@@ -28,6 +28,7 @@ void		rev_pile(t_list_ps **pile)
 	while (temp->next->next)
 		temp = temp->next;
 	free(temp->next->next);
+	free(temp->next);
 	temp->next = NULL;
 }
 

@@ -46,7 +46,7 @@ int			sort_pile(t_list_ps **pile_a, t_list_ps **pile_b, int mode)
 	if (mode == 3 || mode == 5 || mode == 6 || mode == 7)
 	{
 		ft_putnbr(nb_actions);
-		ft_putendl(" movements.\n");
+		ft_putendl(" movements\n");
 	}
 	return (1);
 }
