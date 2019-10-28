@@ -27,9 +27,6 @@ static void		empty_b_small(t_list_ps **pile_a, t_list_ps **pile_b)
 
 void			sort_small(t_list_ps **pile_a, t_list_ps **pile_b, char **prev)
 {
-	// int			pos;
-
-	// pos = 0;
 	while (ft_check_sort(pile_a, pile_b) != 1)
 	{
 		if (ft_check_sort(&((*pile_a)->next->next), pile_b) == 1

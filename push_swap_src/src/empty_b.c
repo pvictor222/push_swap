@@ -12,7 +12,8 @@
 
 #include "push_swap.h"
 
-static int		min_0(t_list_ps **pile_a, t_list_ps **pile_b, int i, char **prev)
+static int		min_0(t_list_ps **pile_a, t_list_ps **pile_b, int i,
+				char **prev)
 {
 	i++;
 	rev_b(pile_a, pile_b, prev);
@@ -21,7 +22,8 @@ static int		min_0(t_list_ps **pile_a, t_list_ps **pile_b, int i, char **prev)
 	return (i);
 }
 
-static int		pos_last(t_list_ps **pile_a, t_list_ps **pile_b, int i, char **prev)
+static int		pos_last(t_list_ps **pile_a, t_list_ps **pile_b, int i,
+				char **prev)
 {
 	i++;
 	rev_b(pile_a, pile_b, prev);
@@ -29,7 +31,8 @@ static int		pos_last(t_list_ps **pile_a, t_list_ps **pile_b, int i, char **prev)
 	return (i);
 }
 
-static int		min_1(t_list_ps **pile_a, t_list_ps **pile_b, int i, char **prev)
+static int		min_1(t_list_ps **pile_a, t_list_ps **pile_b, int i,
+				char **prev)
 {
 	i++;
 	push_a(pile_a, pile_b, prev);
@@ -37,18 +40,22 @@ static int		min_1(t_list_ps **pile_a, t_list_ps **pile_b, int i, char **prev)
 	return (i);
 }
 
-static int		pos_0(t_list_ps **pile_a, t_list_ps **pile_b, int i, char **prev)
+static int		pos_0(t_list_ps **pile_a, t_list_ps **pile_b, int i,
+				char **prev)
 {
 	i++;
 	push_a(pile_a, pile_b, prev);
 	return (i);
 }
 
-void			empty_b(t_list_ps **pile_a, t_list_ps **pile_b, int i, int pos, char **prev)
+void			empty_b(t_list_ps **pile_a, t_list_ps **pile_b, int pos,
+				char **prev)
 {
 	int			size;
 	int			min;
+	int			i;
 
+	i = 0;
 	size = nb_node(*pile_b);
 	while (i < size && *pile_b)
 	{

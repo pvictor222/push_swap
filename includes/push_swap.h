@@ -80,36 +80,44 @@ int						find_q1(t_list_ps *pile, int size_to_sort);
 **	ope_a.c
 */
 
-void					push_a(t_list_ps **pile_a, t_list_ps **pile_b, char **prev);
-void					rotate_a(t_list_ps **pile_a, t_list_ps **pile_b, char **prev);
-void					rev_a(t_list_ps **pile_a, t_list_ps **pile_b, char **prev);
+void					push_a(t_list_ps **pile_a, t_list_ps **pile_b,
+						char **prev);
+void					rotate_a(t_list_ps **pile_a, t_list_ps **pile_b,
+						char **prev);
+void					rev_a(t_list_ps **pile_a, t_list_ps **pile_b,
+						char **prev);
 
 /*
 **	ope_b.c
 */
 
-void					push_b(t_list_ps **pile_a, t_list_ps **pile_b, char **prev);
-void					rotate_b(t_list_ps **pile_a, t_list_ps **pile_b, char **prev);
-void					rev_b(t_list_ps **pile_a, t_list_ps **pile_b, char **prev);
+void					push_b(t_list_ps **pile_a, t_list_ps **pile_b,
+						char **prev);
+void					rotate_b(t_list_ps **pile_a, t_list_ps **pile_b,
+						char **prev);
+void					rev_b(t_list_ps **pile_a, t_list_ps **pile_b,
+						char **prev);
 
 /*
 **	empty_b.c
 */
 
 void					empty_b(t_list_ps **pile_a, t_list_ps **pile_b,\
-						int i, int pos, char **prev);
+						int pos, char **prev);
 
 /*
 **	empty_a_big.c
 */
 
-void					empty_a_big(t_list_ps **pile_a, t_list_ps **pile_b, char **prev);
+void					empty_a_big(t_list_ps **pile_a, t_list_ps **pile_b,
+						char **prev);
 
 /*
 **	sort_small.c
 */
 
-void					sort_small(t_list_ps **pile_a, t_list_ps **pile_b, char **prev);
+void					sort_small(t_list_ps **pile_a, t_list_ps **pile_b,
+						char **prev);
 
 /*
 **	sort_three.c
@@ -140,16 +148,19 @@ void					print_action(char **prev, char *next);
 **	sort_default.c
 */
 
-void					sort_default(t_list_ps **pile_a, t_list_ps **pile_b, char **prev);
-void					empty_last_a(t_list_ps **pile_a, t_list_ps **pile_b, char **prev);
-void					push_below(t_list_ps **pile_a, t_list_ps **pile_b,
-						int mediane, int max, char **prev);
+void					sort_default(t_list_ps **pile_a, t_list_ps **pile_b,
+						char **prev);
+void					empty_last_a(t_list_ps **pile_a, t_list_ps **pile_b,
+						char **prev);
+void					push_below(t_list_ps **pile_a, t_list_ps **pile_b,\
+						int *tab, char **prev);
 
 /*
 **	sort_big.c
 */
 
-void					sort_big(t_list_ps **pile_a, t_list_ps **pile_b, char **prev);
+void					sort_big(t_list_ps **pile_a, t_list_ps **pile_b,
+						char **prev);
 
 /*
 **	swap.c
@@ -192,5 +203,11 @@ void					ft_rrb(t_list_ps **begin_list_a,\
 						t_list_ps **begin_list_b);
 void					ft_rrr(t_list_ps **begin_list_a,\
 						t_list_ps **begin_list_b);
+
+/*
+**	print_algo.c
+*/
+
+void					print_action(char **prev, char *next);
 
 #endif

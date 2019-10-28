@@ -13,7 +13,7 @@
 #include "push_swap.h"
 
 void			push_below(t_list_ps **pile_a, t_list_ps **pile_b,
-				int mediane, int max, char **prev)
+				int *tab, char **prev)
 {
 	int			size;
 	int			i;
@@ -22,9 +22,9 @@ void			push_below(t_list_ps **pile_a, t_list_ps **pile_b,
 	size = nb_node(*pile_a);
 	while (i < size && *pile_a)
 	{
-		if ((*pile_a)->content <= mediane)
+		if ((*pile_a)->content <= tab[0])
 			push_b(pile_a, pile_b, prev);
-		else if ((*pile_a)->content <= max)
+		else if ((*pile_a)->content <= tab[1])
 		{
 			push_b(pile_a, pile_b, prev);
 			rotate_b(pile_a, pile_b, prev);
@@ -35,7 +35,8 @@ void			push_below(t_list_ps **pile_a, t_list_ps **pile_b,
 	}
 }
 
-void			empty_last_a(t_list_ps **pile_a, t_list_ps **pile_b, char **prev)
+void			empty_last_a(t_list_ps **pile_a, t_list_ps **pile_b,
+				char **prev)
 {
 	int			pos;
 
@@ -52,24 +53,24 @@ void			empty_last_a(t_list_ps **pile_a, t_list_ps **pile_b, char **prev)
 	}
 }
 
-static void		empty_a(t_list_ps **pile_a, t_list_ps **pile_b, char **prev)
+static void		empty_a(t_list_ps **pile_a, t_list_ps **pile_b,
+				char **prev)
 {
-	int			med;
-	int			max;
+	int			tab[2];
 
-	med = find_q1(*pile_a, nb_node(*pile_a));
-	max = find_mediane(*pile_a, nb_node(*pile_a));
-	push_below(pile_a, pile_b, med, max, prev);
-	med = find_mediane(*pile_a, nb_node(*pile_a));
-	max = find_max(pile_a);
-	push_below(pile_a, pile_b, med, max, prev);
+	tab[0] = find_q1(*pile_a, nb_node(*pile_a));
+	tab[1] = find_mediane(*pile_a, nb_node(*pile_a));
+	push_below(pile_a, pile_b, tab, prev);
+	tab[0] = find_mediane(*pile_a, nb_node(*pile_a));
+	tab[1] = find_max(pile_a);
+	push_below(pile_a, pile_b, tab, prev);
 }
 
-void			sort_default(t_list_ps **pile_a, t_list_ps **pile_b, char **prev)
+void			sort_default(t_list_ps **pile_a, t_list_ps **pile_b,
+				char **prev)
 {
 	while (ft_check_sort(pile_a, pile_b) != 1)
 	{
-		// Pas sur que ce cas la soit super utile --> a checker
 		if (ft_check_sort(&((*pile_a)->next->next), pile_b) == 1
 				&& (*pile_a)->content < (*pile_a)->next->next->content
 				&& (*pile_a)->next->content < (*pile_a)->next->next->content)
@@ -79,7 +80,7 @@ void			sort_default(t_list_ps **pile_a, t_list_ps **pile_b, char **prev)
 		}
 		empty_a(pile_a, pile_b, prev);
 		sort_three(pile_a, pile_b);
-		empty_b(pile_a, pile_b, 0, 0, prev);
+		empty_b(pile_a, pile_b, 0, prev);
 		while (ft_check_sort(pile_a, pile_b) != 1)
 			rev_a(pile_a, pile_b, prev);
 	}

@@ -59,7 +59,8 @@ int						ft_check_error(char **av1);
 /*
 **	sort_pile.c
 */
-int						sort_pile(t_list_ps **pile_a, t_list_ps **pile_b, int mode);
+int						sort_pile(t_list_ps **pile_a, t_list_ps **pile_b,
+						int mode);
 
 /*
 **	ft_lstnew.c

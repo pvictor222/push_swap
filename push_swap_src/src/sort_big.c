@@ -16,7 +16,6 @@ void			sort_big(t_list_ps **pile_a, t_list_ps **pile_b, char **prev)
 {
 	while (ft_check_sort(pile_a, pile_b) != 1)
 	{
-		// Pas sur que ce cas la soit super utile --> a checker
 		if (ft_check_sort(&((*pile_a)->next->next), pile_b) == 1
 				&& (*pile_a)->content < (*pile_a)->next->next->content
 				&& (*pile_a)->next->content < (*pile_a)->next->next->content)
@@ -26,7 +25,7 @@ void			sort_big(t_list_ps **pile_a, t_list_ps **pile_b, char **prev)
 		}
 		empty_a_big(pile_a, pile_b, prev);
 		sort_three(pile_a, pile_b);
-		empty_b(pile_a, pile_b, 0, 0, prev);
+		empty_b(pile_a, pile_b, 0, prev);
 		while (ft_check_sort(pile_a, pile_b) != 1)
 			rev_a(pile_a, pile_b, prev);
 	}

@@ -36,64 +36,6 @@ void			sort_two(t_list_ps **pile_a, t_list_ps **pile_b)
 	}
 }
 
-void			print_action(char **prev, char *next)
-{
-	if ((ft_strcmp(*prev, "sa") == 0 && ft_strcmp(next, "sb") == 0)
-		|| (ft_strcmp(*prev, "sb") == 0 && ft_strcmp(next, "sa") == 0))
-	{
-		ft_putendl("ss");
-		*prev = "\0\0\0\0";
-		// ft_putendl("***2***");
-	}
-	else if ((ft_strcmp(*prev, "ra") == 0 && ft_strcmp(next, "rb") == 0)
-		|| (ft_strcmp(*prev, "rb") == 0 && ft_strcmp(next, "ra") == 0))
-	{
-		ft_putendl("rr");
-		*prev = "\0\0\0\0";
-		// ft_putendl("***3***");
-	}
-	else if ((ft_strcmp(*prev, "rra") == 0 && ft_strcmp(next, "rrb") == 0)
-		|| (ft_strcmp(*prev, "rrb") == 0 && ft_strcmp(next, "rra") == 0))
-	{
-		ft_putendl("rrr");
-		*prev = "\0\0\0\0";
-		// ft_putendl("***4***");
-	}
-	else  if (!((ft_strcmp(*prev, "sa") == 0 && ft_strcmp(next, "sa") == 0)
-		|| (ft_strcmp(*prev, "sb") == 0 && ft_strcmp(next, "sb") == 0)
-		|| (ft_strcmp(*prev, "ra") == 0 && ft_strcmp(next, "rra") == 0)
-		|| (ft_strcmp(*prev, "rb") == 0 && ft_strcmp(next, "rrb") == 0)
-		|| (ft_strcmp(*prev, "rra") == 0 && ft_strcmp(next, "ra") == 0)
-		|| (ft_strcmp(*prev, "rrb") == 0 && ft_strcmp(next, "rb") == 0)
-		|| (ft_strcmp(*prev, "pa") == 0 && ft_strcmp(next, "pb") == 0)
-		|| (ft_strcmp(*prev, "pb") == 0 && ft_strcmp(next, "pa") == 0)))
-	{
-		if (ft_strcmp(*prev, "\0\0\0\0") != 0)
-			ft_putendl(*prev);
-		*prev = next;
-	}
-	else 
-	{
-		*prev = "\0\0\0\0";	
-		// ft_putendl("***5***");
-	}
-}
-
-
-
-// // Fonction pour afficher une pile, à supprimer
-// #include <stdio.h>
-// static void print_pile(t_list_ps **pile)
-// {
-// 	t_list_ps *temp = *pile;
-// 	while (temp)
-// 	{
-// 		printf("%d ", (temp)->content);
-// 		temp = (temp)->next;
-// 	}
-// 	printf("\n");
-// }
-
 /*
 **	pivots = [
 **	[0]	pivot_a = future pivot of pile_a,
@@ -122,24 +64,8 @@ void			find_algo(t_list_ps **pile_a, t_list_ps **pile_b)
 		sort_three(pile_a, pile_b);
 	else if (nb_node(*pile_a) <= 12)
 		sort_small(pile_a, pile_b, &prev);
-	/*else
-	{
-		quicksort(pile_a, pile_b, &prev, &pivots);
-		ft_putendl(prev);
-		// printf("\n\nFIN DU GAME PUSH_SWAP\n\npile_a : \n\n");
-		// print_pile(pile_a);
-		// printf("\n\npile_b : \n\n");
-		// print_pile(pile_b);
-	}*/
-	
 	else if (nb_node(*pile_a) <= 250)
 		sort_default(pile_a, pile_b, &prev);
 	else
 		sort_big(pile_a, pile_b, &prev);
-	
-
-	// printf("\n\nFIN DU GAME\n\npile_a : \n\n");
-	// print_pile(pile_a);
-	// printf("\n\npile_b : \n\n");
-	// print_pile(pile_b);
 }

@@ -25,6 +25,7 @@ SRC		= push_swap.c			\
 		  ope_b.c				\
 		  empty_b.c				\
 		  empty_a_big.c			\
+		  print_algo.c			\
 		  find_mediane.c		\
 		  find_min_max.c
 
