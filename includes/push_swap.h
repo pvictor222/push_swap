@@ -123,23 +123,30 @@ void					sort_small(t_list_ps **pile_a, t_list_ps **pile_b,
 **	sort_three.c
 */
 
-void					sort_three(t_list_ps **pile_a, t_list_ps **pile_b);
+void					sort_three(t_list_ps **pile_a, t_list_ps **pile_b,
+						char **prev);
 
 /*
 **	sort_three_cases.c
 */
 
-void					case_1(t_list_ps **pile_a, t_list_ps **pile_b);
-void					case_2(t_list_ps **pile_a, t_list_ps **pile_b);
-void					case_3(t_list_ps **pile_a, t_list_ps **pile_b);
-void					case_4(t_list_ps **pile_a, t_list_ps **pile_b);
-void					case_5(t_list_ps **pile_a, t_list_ps **pile_b);
+void					case_1(t_list_ps **pile_a, t_list_ps **pile_b,
+						char **prev);
+void					case_2(t_list_ps **pile_a, t_list_ps **pile_b,
+						char **prev);
+void					case_3(t_list_ps **pile_a, t_list_ps **pile_b,
+						char **prev);
+void					case_4(t_list_ps **pile_a, t_list_ps **pile_b,
+						char **prev);
+void					case_5(t_list_ps **pile_a, t_list_ps **pile_b,
+						char **prev);
 
 /*
 **	find_algo.c
 */
 
-void					sort_two(t_list_ps **pile_a, t_list_ps **pile_b);
+void					sort_two(t_list_ps **pile_a, t_list_ps **pile_b,
+						char **prev);
 void					find_algo(t_list_ps **pile_a, t_list_ps **pile_b);
 int						nb_node(t_list_ps *pile);
 void					print_action(char **prev, char *next);

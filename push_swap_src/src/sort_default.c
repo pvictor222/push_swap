@@ -75,11 +75,11 @@ void			sort_default(t_list_ps **pile_a, t_list_ps **pile_b,
 				&& (*pile_a)->content < (*pile_a)->next->next->content
 				&& (*pile_a)->next->content < (*pile_a)->next->next->content)
 		{
-			sort_two(pile_a, pile_b);
+			sort_two(pile_a, pile_b, prev);
 			return ;
 		}
 		empty_a(pile_a, pile_b, prev);
-		sort_three(pile_a, pile_b);
+		sort_three(pile_a, pile_b, prev);
 		empty_b(pile_a, pile_b, 0, prev);
 		while (ft_check_sort(pile_a, pile_b) != 1)
 			rev_a(pile_a, pile_b, prev);

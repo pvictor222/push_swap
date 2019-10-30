@@ -22,26 +22,26 @@
 **	5. {2,3,1} --> rra
 */
 
-void			sort_three(t_list_ps **pile_a, t_list_ps **pile_b)
+void			sort_three(t_list_ps **pile_a, t_list_ps **pile_b, char **prev)
 {
 	if (ft_check_sort_a(pile_a) == 1)
 		return ;
 	else if (nb_node(*pile_a) == 2)
-		sort_two(pile_a, pile_b);
+		sort_two(pile_a, pile_b, prev);
 	else
 	{
 		if ((*pile_a)->content > (*pile_a)->next->content)
 		{
 			if ((*pile_a)->next->content > (*pile_a)->next->next->content)
-				case_1(pile_a, pile_b);
+				case_1(pile_a, pile_b, prev);
 			else if ((*pile_a)->content > (*pile_a)->next->next->content)
-				case_2(pile_a, pile_b);
+				case_2(pile_a, pile_b, prev);
 			else
-				case_3(pile_a, pile_b);
+				case_3(pile_a, pile_b, prev);
 		}
 		else if ((*pile_a)->content < (*pile_a)->next->next->content)
-			case_4(pile_a, pile_b);
+			case_4(pile_a, pile_b, prev);
 		else
-			case_5(pile_a, pile_b);
+			case_5(pile_a, pile_b, prev);
 	}
 }

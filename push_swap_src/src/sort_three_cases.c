@@ -13,36 +13,36 @@
 #include "push_swap.h"
 #include "pointer.h"
 
-void	case_1(t_list_ps **pile_a, t_list_ps **pile_b)
+void	case_1(t_list_ps **pile_a, t_list_ps **pile_b, char **prev)
 {
 	ft_sa(pile_a, pile_b);
-	ft_putendl("sa");
+	print_action(prev, "sa");
 	ft_rra(pile_a, pile_b);
-	ft_putendl("rra");
+	print_action(prev, "rra");
 }
 
-void	case_2(t_list_ps **pile_a, t_list_ps **pile_b)
+void	case_2(t_list_ps **pile_a, t_list_ps **pile_b, char **prev)
 {
 	ft_ra(pile_a, pile_b);
-	ft_putendl("ra");
+	print_action(prev, "ra");
 }
 
-void	case_3(t_list_ps **pile_a, t_list_ps **pile_b)
+void	case_3(t_list_ps **pile_a, t_list_ps **pile_b, char **prev)
 {
 	ft_sa(pile_a, pile_b);
-	ft_putendl("sa");
+	print_action(prev, "sa");
 }
 
-void	case_4(t_list_ps **pile_a, t_list_ps **pile_b)
+void	case_4(t_list_ps **pile_a, t_list_ps **pile_b, char **prev)
 {
 	ft_rra(pile_a, pile_b);
-	ft_putendl("rra");
+	print_action(prev, "rra");
 	ft_sa(pile_a, pile_b);
-	ft_putendl("sa");
+	print_action(prev, "sa");
 }
 
-void	case_5(t_list_ps **pile_a, t_list_ps **pile_b)
+void	case_5(t_list_ps **pile_a, t_list_ps **pile_b, char **prev)
 {
 	ft_rra(pile_a, pile_b);
-	ft_putendl("rra");
+	print_action(prev, "rra");
 }

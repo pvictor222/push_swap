@@ -60,8 +60,8 @@ int			ft_check_error(char **av1)
 			return (-1);
 		i++;
 	}
-	free(av2);
-	free(av3);
+	// free(av2);
+	// free(av3);
 	if (doublons(av2, nb_arg_av(av1)) != 1)
 		return (-2);
 	return (1);

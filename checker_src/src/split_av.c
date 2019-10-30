@@ -49,7 +49,7 @@ static char		**fill_new(char **new_old, char **to_add, int i, int j)
 		i++;
 	}
 	new_new[i] = NULL;
-	free(new_old);
+	// free(new_old);
 	return (new_new);
 }
 
@@ -68,6 +68,6 @@ char			**split_av(char **av)
 		new = fill_new(new, split, 0, 0);
 		i++;
 	}
-	free(split);
+	// free(split);
 	return (new);
 }

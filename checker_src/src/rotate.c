@@ -25,7 +25,7 @@ void			rotate_pile(t_list_ps **pile)
 		temp = temp->next;
 	temp->next = ft_lstnew_ps(buf->content);
 	*pile = (*pile)->next;
-	free(buf);
+	// free(buf);
 }
 
 void			ft_ra(t_list_ps **pile_a, t_list_ps **pile_b)
