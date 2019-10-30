@@ -40,7 +40,7 @@ void			find_algo(t_list_ps **pile_a, t_list_ps **pile_b)
 {
 	char		*prev;
 
-	if (!(prev = (char*)malloc(sizeof(char) * 4)))
+	if (!(prev = (char*)ft_memalloc(sizeof(char) * 4)))
 		return ;
 	prev = "\0\0\0\0";
 	if (!*pile_a || !(*pile_a)->next || ft_check_sort(pile_a, pile_b) == 1)
