@@ -72,6 +72,19 @@ static char	**fill_new(char **new_old, char **to_add, int i)
 	return (new_new);
 }
 
+// static void	free_new(char **new)
+// {
+// 	int		i;
+
+// 	i = 0;
+// 	while (new[i])
+// 	{
+// 		free(new[i]);
+// 		i++;
+// 	}
+// 	free(new);
+// }
+
 char		**split_av(char **av)
 {
 	int		i;
@@ -88,5 +101,6 @@ char		**split_av(char **av)
 		i++;
 		free_split(split);
 	}
+	// free_new(new);
 	return (new);
 }

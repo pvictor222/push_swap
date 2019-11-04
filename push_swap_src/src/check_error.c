@@ -49,7 +49,20 @@ static void	free_av(char **av)
 	i = 0;
 	while (av[i])
 	{
-		// ft_strdel(&(av[i]));
+		// free((av[i]));
+		i++;
+	}
+	// free(av);
+}
+
+static void	free_int(int *av)
+{
+	int		i;
+
+	i = 0;
+	while (av[i])
+	{
+		// free(&av[i]);
 		i++;
 	}
 	free(av);
@@ -71,7 +84,7 @@ int			ft_check_error(char **av1)
 		av3[i] = ft_itoa(av2[i]);
 		if (ft_strcmp(av3[i], av1[i]) != 0)
 		{
-			free(av2);
+			free_int(av2);
 			free_av(av3);
 			return (-1);
 		}
@@ -79,11 +92,11 @@ int			ft_check_error(char **av1)
 	}
 	if (doublons(av2, nb_arg_av(av1)) != 1)
 	{
-		free(av2);
+		free_int(av2);
 		free_av(av3);
 		return (-1);
 	}
-	free(av2);
+	free_int(av2);
 	free_av(av3);
 	return (1);
 }
