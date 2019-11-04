@@ -59,8 +59,8 @@ int					main(int ac, char **av)
 			return (0);
 		}
 		find_algo(&pile_a, &pile_b);
+		free_new_av(new_av);
+		free_pile(pile_a);
 	}
-	free_new_av(new_av);
-	free_pile(pile_a);
 	return (0);
 }

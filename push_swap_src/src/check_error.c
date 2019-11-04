@@ -42,6 +42,19 @@ static int	doublons(int *av, int size)
 	return (1);
 }
 
+static void	free_av(char **av)
+{
+	int		i;
+
+	i = 0;
+	while (av[i])
+	{
+		// ft_strdel(&(av[i]));
+		i++;
+	}
+	free(av);
+}
+
 int			ft_check_error(char **av1)
 {
 	int		*av2;
@@ -59,7 +72,7 @@ int			ft_check_error(char **av1)
 		if (ft_strcmp(av3[i], av1[i]) != 0)
 		{
 			free(av2);
-			// free(av3);
+			free_av(av3);
 			return (-1);
 		}
 		i++;
@@ -67,10 +80,10 @@ int			ft_check_error(char **av1)
 	if (doublons(av2, nb_arg_av(av1)) != 1)
 	{
 		free(av2);
-		// free(av3);
+		free_av(av3);
 		return (-1);
 	}
 	free(av2);
-	// free(av3);
+	free_av(av3);
 	return (1);
 }

@@ -16,7 +16,7 @@ char	*ft_strnew(size_t size)
 {
 	char	*buf;
 
-	buf = (char*)malloc(sizeof(char) * (size + 1));
+	buf = (char*)ft_memalloc(sizeof(char) * (size + 1));
 	if (!buf)
 		return (NULL);
 	ft_memset(buf, '\0', size + 1);
