@@ -32,9 +32,11 @@ static void	free_split(char **split)
 	while (split[i])
 	{
 		free(split[i]);
+		split[i] = NULL;
 		i++;
 	}
 	free(split);
+	split = NULL;
 }
 
 static char	**fill_new(char **new_old, char **to_add, int i)
@@ -44,7 +46,7 @@ static char	**fill_new(char **new_old, char **to_add, int i)
 
 	j = -1;
 	if (!(new_new = (char**)ft_memalloc(sizeof(char*) * ((nb_arg(to_add))
-						+ nb_arg(new_old) + 2))))
+						+ nb_arg(new_old) + 1))))
 	{
 		// free_split(new_old);
 		return (NULL);
@@ -86,7 +88,7 @@ char		**split_av(char **av)
 		split = ft_split_whitespaces(av[i]);
 		new = fill_new(new, split, 0);
 		i++;
-		free_split(split);
 	}
+	free_split(split);
 	return (new);
 }

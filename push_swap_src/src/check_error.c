@@ -47,12 +47,14 @@ static void	free_av(char **av)
 	int		i;
 
 	i = 0;
-	while (av[i])
+	while (av[i] != NULL)
 	{
-		// ft_strdel(&(av[i]));
+		// free(av[i]);
+		av[i] = NULL;
 		i++;
 	}
 	free(av);
+	av = NULL;
 }
 
 int			ft_check_error(char **av1)
@@ -76,6 +78,7 @@ int			ft_check_error(char **av1)
 			return (-1);
 		}
 		i++;
+		av3[i] = NULL;
 	}
 	if (doublons(av2, nb_arg_av(av1)) != 1)
 	{

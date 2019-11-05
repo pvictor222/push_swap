@@ -17,9 +17,9 @@ static void			free_new_av(char **new_av)
 	int				i;
 
 	i = 0;
-	while ((new_av)[i])
+	while (new_av[i])
 	{
-		free((new_av)[i]);
+		free(new_av[i]);
 		i++;
 	}
 	free(new_av);
@@ -28,14 +28,20 @@ static void			free_new_av(char **new_av)
 static void			free_pile(t_list_ps *pile_a)
 {
 	t_list_ps		*temp;
+	t_list_ps		*head;
 
 	temp = pile_a;
+	head = pile_a;
 	while (temp)
 	{
 		pile_a = temp;
 		temp = pile_a->next;
+		// ft_putnbr(pile_a->content);
+		// ft_putendl("");
 		free(pile_a);
+		pile_a = NULL;
 	}
+	free(temp);
 }
 
 int					main(int ac, char **av)
