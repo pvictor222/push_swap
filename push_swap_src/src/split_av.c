@@ -29,7 +29,7 @@ static void	free_split(char **split)
 	int		i;
 
 	i = 0;
-	while (split[i])
+	while (split[i] != NULL)
 	{
 		free(split[i]);
 		split[i] = NULL;
@@ -39,39 +39,29 @@ static void	free_split(char **split)
 	split = NULL;
 }
 
-static char	**fill_new(char **new_old, char **to_add, int i)
+static char	**fill_new(char **src, char **to_add)
 {
-	char	**new_new;
+	char	**dest;
+	int		i;
 	int		j;
 
+	i = 0;
 	j = -1;
-	if (!(new_new = (char**)ft_memalloc(sizeof(char*) * ((nb_arg(to_add))
-						+ nb_arg(new_old) + 1))))
-	{
-		// free_split(new_old);
+	if (!(dest = (char**)ft_memalloc(sizeof(char*) * ((nb_arg(to_add))
+		+ nb_arg(src) + 2))))
 		return (NULL);
-	}
-	if (new_old != NULL)
+	if (src != NULL)
 	{
-		while (new_old[i] != NULL)
+		while (src[i] != NULL)
 		{
-			new_new[i] = ft_strdup(new_old[i]);
+			dest[i] = ft_strdup(src[i]);
 			i++;
 		}
 	}
 	while (to_add[++j] != NULL)
-	{
-		if (!(new_new[i] = (char*)ft_memalloc(sizeof(char)
-						* (ft_strlen(to_add[j]) + 1))))
-		{
-			// free_split(new_old);
-			return (NULL);
-		}
-		new_new[i++] = ft_strdup(to_add[j]);
-	}
-	new_new[i] = NULL;
-	// free_split(new_old);
-	return (new_new);
+		dest[i++] = ft_strdup(to_add[j]);
+	dest[i] = NULL;
+	return (dest);
 }
 
 char		**split_av(char **av)
@@ -86,7 +76,7 @@ char		**split_av(char **av)
 	while (av[i] != NULL)
 	{
 		split = ft_split_whitespaces(av[i]);
-		new = fill_new(new, split, 0);
+		new = fill_new(new, split);
 		i++;
 	}
 	free_split(split);
