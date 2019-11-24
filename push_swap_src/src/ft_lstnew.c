@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
 t_list_ps		*ft_lstnew_ps(int content)
 {
@@ -20,5 +20,16 @@ t_list_ps		*ft_lstnew_ps(int content)
 		return (NULL);
 	buf->content = content;
 	buf->next = (t_list_ps*)NULL;
+	return (buf);
+}
+
+t_list_new		*ft_lstnew_new(char *content)
+{
+	t_list_new	*buf;
+
+	if (!(buf = (t_list_new*)ft_memalloc(sizeof(t_list_new))))
+		return (NULL);
+	buf->content = content;
+	buf->next = (t_list_new*)NULL;
 	return (buf);
 }

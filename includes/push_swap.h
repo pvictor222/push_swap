@@ -23,6 +23,16 @@ typedef struct			s_list_ps
 }						t_list_ps;
 
 /*
+**	split_av.c
+*/
+
+typedef struct			s_list_new
+{
+	char*				content;
+	struct s_list_new	*next;
+}						t_list_new;
+
+/*
 **	get_pile.c
 */
 
@@ -33,12 +43,14 @@ t_list_ps				*get_pile_a(char **av);
 */
 
 void					ft_lstadd_ps(t_list_ps **alst, t_list_ps *new);
+void					ft_lstadd_new(t_list_new **alst, t_list_new *new);
 
 /*
 **	ft_lstnew.c
 */
 
 t_list_ps				*ft_lstnew_ps(int content);
+t_list_new				*ft_lstnew_new(char *content);
 
 /*
 **	split_ac.c

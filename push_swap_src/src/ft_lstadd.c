@@ -10,9 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
 void	ft_lstadd_ps(t_list_ps **alst, t_list_ps *new)
+{
+	if ((new != NULL))
+	{
+		new->next = *alst;
+		*alst = new;
+	}
+}
+
+void	ft_lstadd_new(t_list_new **alst, t_list_new *new)
 {
 	if ((new != NULL))
 	{
