@@ -42,31 +42,22 @@ static int	doublons(int *av, int size)
 	return (1);
 }
 
-// static void	free_av(char **av)
-// {
-// 	int		i;
+static void	free_avs(int *av2, char **av3)
+{
+	int		i;
 
-// 	i = 0;
-// 	while (av[i] != NULL)
-// 	{
-// 		// av[i] = NULL;
-// 		i++;
-// 	}
-// 	// free(av);
-// }
-
-// static void	free_int(int *av)
-// {
-// 	int		i;
-
-// 	i = 0;
-// 	while (av[i])
-// 	{
-// 		i++;
-// 	}
-// 	// free(av);
-// 	// av = NULL;
-// }
+	i = 0;
+	free(av2);
+	av2 = NULL;
+	while(av3[i])
+	{
+		free(av3[i]);
+		av3[i] = NULL;
+		i++;
+	}
+	free(av3);
+	av3 = NULL;
+}
 
 int			ft_check_error(char **av1)
 {
@@ -75,8 +66,8 @@ int			ft_check_error(char **av1)
 	int		i;
 
 	i = 0;
-	if (!(av2 = (int*)ft_memalloc(sizeof(char) * nb_arg_av(av1)))
-			|| !(av3 = (char**)ft_memalloc(sizeof(char*) * nb_arg_av(av1))))
+	if (!(av2 = (int*)ft_memalloc(sizeof(int) * (nb_arg_av(av1) + 1)))
+			|| !(av3 = (char**)ft_memalloc(sizeof(char*) * (nb_arg_av(av1) + 1))))
 		return (0);
 	while (i < nb_arg_av(av1))
 	{
@@ -84,20 +75,17 @@ int			ft_check_error(char **av1)
 		av3[i] = ft_itoa(av2[i]);
 		if (ft_strcmp(av3[i], av1[i]) != 0)
 		{
-			// free_int(av2);
-			// free_av(av3);
+			free_avs(av2, av3);
 			return (-1);
 		}
 		i++;
-		av3[i] = NULL;
 	}
+	av3[i] = NULL;
 	if (doublons(av2, nb_arg_av(av1)) != 1)
 	{
-		// free_int(av2);
-		// free_av(av3);
+		free_avs(av2, av3);
 		return (-1);
 	}
-	// free_int(av2);
-	// free_av(av3);
+	free_avs(av2, av3);
 	return (1);
 }

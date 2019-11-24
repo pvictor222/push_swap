@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static void			free_new_av(char **new_av)
+void				free_new_av(char **new_av)
 {
 	int				i;
 
@@ -38,6 +38,7 @@ static void			free_pile(t_list_ps *pile_a)
 		pile_a = NULL;
 	}
 	free(temp);
+	temp = NULL;
 }
 
 int					main(int ac, char **av)

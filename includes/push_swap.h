@@ -125,6 +125,12 @@ void					empty_a_big(t_list_ps **pile_a, t_list_ps **pile_b,
 						char **prev);
 
 /*
+**	push_swap.c
+*/
+
+void					free_new_av(char **new_av);
+
+/*
 **	sort_small.c
 */
 

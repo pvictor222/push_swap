@@ -76,6 +76,19 @@ static char		**fill_new(t_list_new **pile)
 	return (dest);
 }
 
+static void		free_split(char **split)
+{
+	int			i;
+
+	i = 0;
+	while (split[i])
+	{
+		// free(split[i]);
+		split[i] = NULL;
+		i++;
+	}
+	free(split);
+}
 
 /*
 **	On met tous les arguments dans une liste chainee
@@ -97,6 +110,7 @@ char			**split_av(char **av)
 	{
 		split = ft_split_whitespaces(av[i]);
 		fill_list_av(split, &pile);
+		free_split(split);
 		i++;
 	}
 	new = fill_new(&pile);

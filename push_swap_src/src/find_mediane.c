@@ -39,6 +39,7 @@ int				find_mediane(t_list_ps *pile, int size_to_sort)
 	}
 	ft_sort_integer_tab(tab, i - 1);
 	mediane = calc_mediane(tab, i);
+	free(tab);
 	return (mediane);
 }
 
@@ -69,5 +70,6 @@ int				find_q1(t_list_ps *pile, int size_to_sort)
 	}
 	ft_sort_integer_tab(tab, i - 1);
 	q1 = calc_q1(tab, i);
+	free(tab);
 	return (q1);
 }
