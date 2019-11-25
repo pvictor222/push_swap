@@ -178,13 +178,13 @@ int				main(int ac, char **av)
 		else if (check_trim(av[1]) != -1 && (mode = is_option(new_av[0])) >= 1) {
 			new_av = verbose_av(new_av);
 		}
-		if (ft_check_error(new_av) == -1) {
+		if (ft_check_error_checker(new_av) == -1) {
 			ft_putendl((mode == 0) ? "Error" : "Error: arguments must be numbers");
 		}
-		else if (ft_check_error(new_av) == -2) {
+		else if (ft_check_error_checker(new_av) == -2) {
 			ft_putendl((mode == 0) ? "Error" : "Error: repeated arguments");
 		}
-		else if (!(pile_a = get_pile_a(new_av)) || sort_pile(&pile_a, &pile_b, mode) < 1)
+		else if (!(pile_a = get_pile_a_checker(new_av)) || sort_pile(&pile_a, &pile_b, mode) < 1)
 			ft_putendl((mode == 0) ? "Error" : "Error: wrong instructions");
 		else
 		{

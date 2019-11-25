@@ -50,13 +50,13 @@ int					main(int ac, char **av)
 	if (ac > 1)
 	{
 		pile_b = NULL;
-		if (!(new_av = split_av(av)) || ft_check_error(new_av) < 1)
+		if (!(new_av = split_av(av)) || ft_check_error(new_av, -1) < 1)
 		{
 			free_new_av(new_av);
 			ft_putendl("Error");
 			return (0);
 		}
-		get_pile_a(new_av, &pile_a);
+		get_pile_a(new_av, &(pile_a));
 		free_new_av(new_av);
 		find_algo(&pile_a, &pile_b);
 		free_pile(pile_a);

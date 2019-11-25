@@ -53,6 +53,12 @@ t_list_ps				*ft_lstnew_ps(int content);
 t_list_new				*ft_lstnew_new(char *content);
 
 /*
+**	nb_node.c
+*/
+
+int						nb_node_new(t_list_new *pile_a);
+
+/*
 **	split_ac.c
 */
 
@@ -62,7 +68,7 @@ char					**split_av(char **av);
 **	check_error.c
 */
 
-int						ft_check_error(char **av1);
+int						ft_check_error(char **av1, int i);
 
 /*
 **	check_sort.c

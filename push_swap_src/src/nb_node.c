@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   nb_node.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvictor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/13 18:51:35 by pvictor           #+#    #+#             */
-/*   Updated: 2019/11/25 15:42:31 by pvictor          ###   ########.fr       */
+/*   Created: 2019/11/25 15:37:57 by pvictor           #+#    #+#             */
+/*   Updated: 2019/11/25 15:40:24 by pvictor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list_ps		*ft_lstnew_ps(int content)
+int		nb_node_new(t_list_new *pile_a)
 {
-	t_list_ps	*buf;
+	int			i;
+	t_list_new	*temp;
 
-	if (!(buf = (t_list_ps*)ft_memalloc(sizeof(t_list_ps))))
-		return (NULL);
-	buf->content = content;
-	buf->next = (t_list_ps*)NULL;
-	return (buf);
-}
-
-t_list_new		*ft_lstnew_new(char *content)
-{
-	t_list_new	*buf;
-
-	if (!(buf = (t_list_new*)ft_memalloc(sizeof(t_list_new))))
-		return (NULL);
-	buf->content = content;
-	buf->next = (t_list_new*)NULL;
-	return (buf);
+	i = 0;
+	temp = pile_a;
+	while (temp->next)
+	{
+		temp = temp->next;
+		i++;
+	}
+	return (i);
 }

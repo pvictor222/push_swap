@@ -27,6 +27,7 @@ SRC		= push_swap.c			\
 		  empty_a_big.c			\
 		  print_algo.c			\
 		  find_mediane.c		\
+		  nb_node.c				\
 		  find_min_max.c
 
 OBJ		= $(addprefix $(OBJDIR)/,$(SRC:.c=.o))

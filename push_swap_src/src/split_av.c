@@ -12,25 +12,10 @@
 
 #include "push_swap.h"
 
-static int		nb_node_new(t_list_new *pile_a)
+static void			fill_list_av(char **split, t_list_new **pile)
 {
-	int			i;
-	t_list_new	*temp;
-
-	i = 0;
-	temp = pile_a;
-	while (temp->next)
-	{
-		temp = temp->next;
-		i++;
-	}
-	return (i);
-}
-
-static void		fill_list_av(char **split, t_list_new **pile)
-{
-	int			i;
-	t_list_new	*new;
+	int				i;
+	t_list_new		*new;
 
 	i = 0;
 	while (split[i] != NULL)
@@ -56,11 +41,11 @@ static void			free_pile(t_list_new *pile_a)
 	free(temp);
 }
 
-static char		**fill_new(t_list_new **pile)
+static char			**fill_new(t_list_new **pile)
 {
-	int			i;
-	char		**dest;
-	t_list_new	*temp;
+	int				i;
+	char			**dest;
+	t_list_new		*temp;
 
 	temp = *pile;
 	if (!(dest = (char**)ft_memalloc(sizeof(char*) * (nb_node_new(temp) + 2))))
@@ -82,9 +67,9 @@ static char		**fill_new(t_list_new **pile)
 	return (dest);
 }
 
-static void		free_split(char **split)
+static void			free_split(char **split)
 {
-	int			i;
+	int				i;
 
 	i = 0;
 	while (split[i] != NULL)
@@ -101,12 +86,12 @@ static void		free_split(char **split)
 **	On passe cette liste chainee dans un tableau et on return
 */
 
-char			**split_av(char **av)
+char				**split_av(char **av)
 {
-	int			i;
-	char		**new;
-	char		**split;
-	t_list_new	*pile;
+	int				i;
+	char			**new;
+	char			**split;
+	t_list_new		*pile;
 
 	i = 1;
 	new = NULL;

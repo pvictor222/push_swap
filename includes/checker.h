@@ -54,7 +54,7 @@ int						ft_check_sort(t_list_ps **pile_a, t_list_ps **pile_b);
 **	check_error.c
 */
 
-int						ft_check_error(char **av1);
+int						ft_check_error_checker(char **av1);
 
 /*
 **	sort_pile.c
@@ -78,7 +78,7 @@ void					ft_lstadd_ps(t_list_ps **alst, t_list_ps *new);
 **	get_pile.c
 */
 
-t_list_ps				*get_pile_a(char **av);
+t_list_ps				*get_pile_a_checker(char **av);
 
 /*
 **	split_ac.c

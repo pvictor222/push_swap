@@ -6,7 +6,7 @@
 /*   By: pvictor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 18:33:23 by pvictor           #+#    #+#             */
-/*   Updated: 2019/04/12 17:10:59 by pvictor          ###   ########.fr       */
+/*   Updated: 2019/11/25 15:44:45 by pvictor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	free_avs(int *av2, char **av3)
 	i = 0;
 	free(av2);
 	av2 = NULL;
-	while(av3[i])
+	while (av3[i])
 	{
 		free(av3[i]);
 		av3[i] = NULL;
@@ -59,17 +59,16 @@ static void	free_avs(int *av2, char **av3)
 	av3 = NULL;
 }
 
-int			ft_check_error(char **av1)
+int			ft_check_error(char **av1, int i)
 {
 	int		*av2;
 	char	**av3;
-	int		i;
 
-	i = 0;
 	if (!(av2 = (int*)ft_memalloc(sizeof(int) * (nb_arg_av(av1) + 1)))
-			|| !(av3 = (char**)ft_memalloc(sizeof(char*) * (nb_arg_av(av1) + 1))))
+			|| !(av3 = (char**)ft_memalloc(sizeof(char*)
+				* (nb_arg_av(av1) + 1))))
 		return (0);
-	while (i < nb_arg_av(av1))
+	while (++i < nb_arg_av(av1))
 	{
 		av2[i] = ft_atoi(av1[i]);
 		av3[i] = ft_itoa(av2[i]);
@@ -78,7 +77,6 @@ int			ft_check_error(char **av1)
 			free_avs(av2, av3);
 			return (-1);
 		}
-		i++;
 	}
 	av3[i] = NULL;
 	if (doublons(av2, nb_arg_av(av1)) != 1)
