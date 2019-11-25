@@ -63,10 +63,16 @@ static char		**fill_new(t_list_new **pile)
 	t_list_new	*temp;
 
 	temp = *pile;
-	if (!(dest = (char**)ft_memalloc(sizeof(char*) * (nb_node_new(temp) + 1))))
+	if (!(dest = (char**)ft_memalloc(sizeof(char*) * (nb_node_new(temp) + 2))))
 		return (NULL);
 	i = nb_node_new(temp);
-	dest[nb_node_new(temp) + 1] = NULL;
+	while (i >= -1)
+	{
+		dest[i + 1] = NULL;
+		i--;
+	}
+	i = nb_node_new(temp);
+	dest[i + 1] = NULL;
 	while (temp)
 	{
 		dest[i] = ft_strdup(temp->content);
@@ -81,9 +87,9 @@ static void		free_split(char **split)
 	int			i;
 
 	i = 0;
-	while (split[i])
+	while (split[i] != NULL)
 	{
-		// free(split[i]);
+		free(split[i]);
 		split[i] = NULL;
 		i++;
 	}
@@ -108,12 +114,14 @@ char			**split_av(char **av)
 	pile = NULL;
 	while (av[i] != NULL)
 	{
-		split = ft_split_whitespaces(av[i]);
+		if (!(split = ft_split_whitespaces(av[i])))
+			return (NULL);
 		fill_list_av(split, &pile);
-		free_split(split);
 		i++;
 	}
 	new = fill_new(&pile);
+	i = 0;
 	free_pile(pile);
+	free_split(split);
 	return (new);
 }

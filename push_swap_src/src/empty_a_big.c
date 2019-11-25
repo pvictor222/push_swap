@@ -55,6 +55,7 @@ static int		find_decile(t_list_ps *pile_a, int dec_number, int size_to_sort)
 	}
 	ft_sort_integer_tab(tab, i - 1);
 	decile = calc_decile(tab, i, (dec_number + 1));
+	free(tab);
 	return (decile);
 }
 
@@ -90,4 +91,5 @@ void			empty_a_big(t_list_ps **pile_a, t_list_ps **pile_b, char **prev)
 		push_below(pile_a, pile_b, tab, prev);
 		i++;
 	}
+	free(deciles);
 }

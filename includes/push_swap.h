@@ -36,7 +36,7 @@ typedef struct			s_list_new
 **	get_pile.c
 */
 
-t_list_ps				*get_pile_a(char **av);
+void					get_pile_a(char **av, t_list_ps **pile_a);
 
 /*
 **	ft_lstadd.c

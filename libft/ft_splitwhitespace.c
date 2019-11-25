@@ -41,29 +41,33 @@ int		ft_length_word(char *str)
 	int		i;
 
 	i = 0;
-	while (str[i] != '\0' && str[i] != '\n' && str[i] != ' ' && str[i] != '\t')
+	while (str[i] && str[i] != '\0' && str[i] != '\n' && str[i] != ' ' && str[i] != '\t')
 		i++;
 	return (i);
 }
 
-char	*ft_strdup_split(char *src)
+void		ft_strdup_split(char *src, char ***tab, int j)
 {
-	char	*dest;
 	int		i;
 	int		len;
 
 	len = ft_length_word(src);
-	dest = (char*)ft_memalloc(sizeof(char) * (len + 1));
-	if (!dest)
-		return (NULL);
+	if (!(((*(tab))[j]) = (char*)ft_memalloc(sizeof(char) * (len + 1))))
+		return ;
 	i = 0;
-	while (src[i] != ' ' && src[i] != '\t' && src[i] != '\n' && src[i] != '\0')
+	while (i <= len)
 	{
-		dest[i] = src[i];
+		((*(tab))[j])[i] = '\0';
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	i = 0;
+	while (src[i] != '\0' && src[i] != ' ' && src[i] != '\t' && src[i] != '\n')
+	{
+		((*(tab))[j])[i] = src[i];
+		i++;
+	}
+	((*(tab))[j])[i] = '\0';
+	// return (dest);
 }
 
 char	**ft_split_whitespaces(char *str)
@@ -75,6 +79,7 @@ char	**ft_split_whitespaces(char *str)
 
 	len = ft_number_words(str);
 	tab = (char**)ft_memalloc(sizeof(char*) * (len + 1));
+	tab[len] = NULL;
 	i = 0;
 	j = 0;
 	while (str[i] != '\0')
@@ -83,7 +88,8 @@ char	**ft_split_whitespaces(char *str)
 			i++;
 		if (str[i] != ' ' && str[i] != '\n' && str[i] != '\t' && str[i] != '\0')
 		{
-			tab[j] = ft_strdup_split(&str[i]);
+			tab[j] = NULL;
+			ft_strdup_split(&str[i], &tab, j);
 			j++;
 			while (str[i] != '\n' && str[i] != ' '
 					&& str[i] != '\t' && str[i] != '\0')

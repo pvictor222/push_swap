@@ -30,7 +30,7 @@ static void			free_pile(t_list_ps *pile_a)
 	t_list_ps		*temp;
 
 	temp = pile_a;
-	while (temp)
+	while (temp != NULL)
 	{
 		pile_a = temp;
 		temp = pile_a->next;
@@ -56,14 +56,11 @@ int					main(int ac, char **av)
 			ft_putendl("Error");
 			return (0);
 		}
-		if (!(pile_a = get_pile_a(new_av)))
-		{
-			free_new_av(new_av);
-			return (0);
-		}
+		get_pile_a(new_av, &pile_a);
 		free_new_av(new_av);
 		find_algo(&pile_a, &pile_b);
 		free_pile(pile_a);
+		free_pile(pile_b);
 	}
 	return (0);
 }

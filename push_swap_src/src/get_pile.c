@@ -12,20 +12,18 @@
 
 #include "push_swap.h"
 
-t_list_ps		*get_pile_a(char **av)
+void			get_pile_a(char **av, t_list_ps **pile_a)
 {
 	int			i;
-	t_list_ps	*pile;
 	t_list_ps	*new;
 
 	i = 0;
-	pile = NULL;
+	(*pile_a) = NULL;
 	while (av[i] != NULL)
 		i++;
 	while (--i >= 0)
 	{
 		new = ft_lstnew_ps(ft_atoi(av[i]));
-		ft_lstadd_ps(&pile, new);
+		ft_lstadd_ps(pile_a, new);
 	}
-	return (pile);
 }
