@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   free_pile.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvictor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/25 09:54:50 by pvictor           #+#    #+#             */
-/*   Updated: 2019/04/17 18:06:06 by pvictor          ###   ########.fr       */
+/*   Created: 2019/11/25 17:58:28 by pvictor           #+#    #+#             */
+/*   Updated: 2019/11/25 17:58:29 by pvictor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-static void		push_piles(t_list_ps **dest, t_list_ps **src)
+void				free_pile(t_list_ps **pile)
 {
-	t_list_ps	*temp;
+	t_list_ps		*temp;
 
-	if (!src || !*src)
-		return ;
-	temp = *src;
-	*src = (*src)->next;
-	ft_lstadd_ps_checker(dest, temp);
+	temp = *pile;
+	while (temp)
+	{
+		*pile = temp;
+		temp = temp->next;
+		free(*pile);
+	}
 }
 
-void			ft_pa(t_list_ps **pile_a, t_list_ps **pile_b)
+void				free_piles(t_list_ps **pile_a, t_list_ps **pile_b)
 {
-	(void)pile_b;
-	push_piles(pile_a, pile_b);
-}
-
-void			ft_pb(t_list_ps **pile_a, t_list_ps **pile_b)
-{
-	(void)pile_a;
-	push_piles(pile_b, pile_a);
+	free_pile(pile_a);
+	free_pile(pile_b);
 }

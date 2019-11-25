@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   free_str_tab.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvictor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/14 11:30:12 by pvictor           #+#    #+#             */
-/*   Updated: 2019/03/25 11:51:16 by pvictor          ###   ########.fr       */
+/*   Created: 2019/11/25 18:14:58 by pvictor           #+#    #+#             */
+/*   Updated: 2019/11/25 18:15:01 by pvictor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void	ft_lstadd_ps(t_list_ps **alst, t_list_ps *new)
+void			free_str_tab(char **str)
 {
-	if ((new != NULL))
+	int			i;
+
+	i = 0;
+	while (str[i])
 	{
-		new->next = *alst;
-		*alst = new;
+		free(str[i]);
+		str[i] = NULL;
+		i++;
 	}
+	free(str);
 }

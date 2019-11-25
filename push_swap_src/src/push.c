@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
 static void		push_piles(t_list_ps **dest, t_list_ps **src)
 {

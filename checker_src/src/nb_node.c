@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   nb_node.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvictor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/25 09:54:50 by pvictor           #+#    #+#             */
-/*   Updated: 2019/04/17 18:06:06 by pvictor          ###   ########.fr       */
+/*   Created: 2019/11/25 15:37:57 by pvictor           #+#    #+#             */
+/*   Updated: 2019/11/25 15:40:24 by pvictor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-static void		push_piles(t_list_ps **dest, t_list_ps **src)
+int		nb_node_new(t_list_new *pile_a)
 {
-	t_list_ps	*temp;
+	int			i;
+	t_list_new	*temp;
 
-	if (!src || !*src)
-		return ;
-	temp = *src;
-	*src = (*src)->next;
-	ft_lstadd_ps_checker(dest, temp);
-}
-
-void			ft_pa(t_list_ps **pile_a, t_list_ps **pile_b)
-{
-	(void)pile_b;
-	push_piles(pile_a, pile_b);
-}
-
-void			ft_pb(t_list_ps **pile_a, t_list_ps **pile_b)
-{
-	(void)pile_a;
-	push_piles(pile_b, pile_a);
+	i = 0;
+	temp = pile_a;
+	while (temp->next)
+	{
+		temp = temp->next;
+		i++;
+	}
+	return (i);
 }

@@ -21,6 +21,16 @@ typedef struct			s_list_ps
 	struct s_list_ps	*next;
 }						t_list_ps;
 
+/*
+**	split_av.c
+*/
+
+typedef struct			s_list_new
+{
+	char*				content;
+	struct s_list_new	*next;
+}						t_list_new;
+
 void					ft_sa(t_list_ps **begin_list_a,\
 						t_list_ps **begin_list_b);
 void					ft_sb(t_list_ps **begin_list_a,\
@@ -54,25 +64,47 @@ int						ft_check_sort(t_list_ps **pile_a, t_list_ps **pile_b);
 **	check_error.c
 */
 
-int						ft_check_error_checker(char **av1);
+int						ft_check_error_checker(char **av1, int i);
 
 /*
 **	sort_pile.c
 */
+
 int						sort_pile(t_list_ps **pile_a, t_list_ps **pile_b,
 						int mode);
 
+
 /*
-**	ft_lstnew.c
+**	free_pile.c
 */
 
-t_list_ps				*ft_lstnew_ps(int content);
+void					free_piles(t_list_ps **pile_a, t_list_ps **pile_b);
+
+/*
+**	free_str_tab.c
+*/
+
+void					free_str_tab(char **str);
 
 /*
 **	ft_lstadd.c
 */
 
-void					ft_lstadd_ps(t_list_ps **alst, t_list_ps *new);
+void					ft_lstadd_ps_checker(t_list_ps **alst, t_list_ps *new);
+void					ft_lstadd_new_checker(t_list_new **alst, t_list_new *new);
+
+/*
+**	ft_lstnew.c
+*/
+
+t_list_ps				*ft_lstnew_ps_checker(int content);
+t_list_new				*ft_lstnew_new_checker(char *content);
+
+/*
+**	nb_node.c
+*/
+
+int						nb_node_new(t_list_new *pile_a);
 
 /*
 **	get_pile.c

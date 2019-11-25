@@ -23,61 +23,55 @@ static int		check_trim(char *str)
 	return (-1);
 }
 
-static char		**verbose_av(char **new_av)
+static int		nb_elem(char **tab)
 {
 	int			i;
 
 	i = 0;
-	while (new_av[i + 1])
-	{
-		new_av[i] = new_av[i + 1];
+	while (tab[i])
 		i++;
-	}
-	new_av[i] = NULL;
-	return(new_av);
+	return(i);
 }
 
-// void			ft_free_av(char ***new_av)
-// {
-// 	int			i;
+static char		**verbose_av(char **new_av)
+{
+	int			i;
+	char		**ret;
 
-// 	i = 0;
-// 	while (new_av[i])
-// 	{
-// 		free(new_av[i]);
-// 		i++;
-// 	}
-// 	free(new_av);
-// }
+	if (!(ret = (char**)ft_memalloc(sizeof(char*) * (nb_elem(new_av) + 1))))
+		return (NULL);
+	i = 0;
+	while (new_av[i + 1])
+	{
+		ret[i] = ft_strdup(new_av[i + 1]);
+		i++;
+	}
+	ret[i] = NULL;
+	free_str_tab(new_av);
+	return (ret);
 
-// static void		ft_free_piles(t_list_ps **pile_a, t_list_ps **pile_b)
-// {
-// 	t_list_ps	*temp;
 
-// 	while (*pile_a) {
-// 		temp = *pile_a;
-// 		*pile_a = (*pile_a)->next;
-// 		free(temp);
-// 	}
-// 	free(*pile_a);
-// 	free(*pile_b);
-// }
+	// int			i;
+	// char		*temp;
 
-// static void		ft_free_av(char ***av)
-// {
-// 	int			i;
-
-// 	i = -1;
-// 	while (av[++i])
-// 		ft_strdel(av[i]);
-// 	ft_strdel(av[i]);
-// }
+	// i = 0;
+	// while (new_av[i + 1])
+	// {
+	// 	temp = new_av[i + 1];
+	// 	new_av[i] = NULL;
+	// 	new_av[i] = temp;
+	// 	i++;
+	// }
+	// // free(new_av[i]);
+	// new_av[i] = NULL;
+	// return(new_av);
+}
 
 /*
 **	Print the options if the 'h' tag is on
 */
 
-static void			print_help()
+static void		print_help()
 {
 	ft_putendl("List of available options:");
 	ft_putendl("        '-h' --> help menue");
@@ -104,7 +98,6 @@ static void		print_pile(char **av)
 	}
 	ft_putendl("\n");
 }
-
 
 /*
 **	Tag list:
@@ -178,10 +171,10 @@ int				main(int ac, char **av)
 		else if (check_trim(av[1]) != -1 && (mode = is_option(new_av[0])) >= 1) {
 			new_av = verbose_av(new_av);
 		}
-		if (ft_check_error_checker(new_av) == -1) {
+		if (ft_check_error_checker(new_av, -1) == -1) {
 			ft_putendl((mode == 0) ? "Error" : "Error: arguments must be numbers");
 		}
-		else if (ft_check_error_checker(new_av) == -2) {
+		else if (ft_check_error_checker(new_av, -1) == -2) {
 			ft_putendl((mode == 0) ? "Error" : "Error: repeated arguments");
 		}
 		else if (!(pile_a = get_pile_a_checker(new_av)) || sort_pile(&pile_a, &pile_b, mode) < 1)
@@ -197,8 +190,8 @@ int				main(int ac, char **av)
 				ft_putendl("KO");
 			}
 		}
-		// ft_free_av(&new_av);
-		// ft_free_piles(&pile_a, &pile_b);
+		free_piles(&pile_a, &pile_b);
+		free_str_tab(new_av);
 	}
 	return (0);
 }

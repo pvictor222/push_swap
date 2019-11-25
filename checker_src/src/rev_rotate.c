@@ -20,16 +20,14 @@ void		rev_pile(t_list_ps **pile)
 	if (!(*pile) || !(*pile)->next)
 		return ;
 	temp = *pile;
+	buf = *pile;
 	while (temp->next)
 		temp = temp->next;
-	buf = ft_lstnew_ps(temp->content);
-	ft_lstadd_ps(pile, buf);
-	temp = *pile;
-	while (temp->next->next)
-		temp = temp->next;
-	// free(temp->next->next);
-	// free(temp->next);
-	temp->next = NULL;
+	while (buf->next->next)
+		buf = buf->next;
+	temp->next = *pile;
+	*pile = temp;
+	buf->next = NULL;
 }
 
 void		ft_rra(t_list_ps **pile_a, t_list_ps **pile_b)

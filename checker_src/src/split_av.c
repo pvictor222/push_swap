@@ -10,64 +10,103 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
-static int		nb_arg(char **av)
+static void			fill_list_av(char **split, t_list_new **pile)
 {
-	int			i;
+	int				i;
+	t_list_new		*new;
 
-	if (av == NULL)
-		return (0);
 	i = 0;
-	while (av[i] != NULL)
+	while (split[i] != NULL)
+	{
+		new = ft_lstnew_new_checker(split[i]);
+		ft_lstadd_new_checker(pile, new);
 		i++;
-	return (i + 1);
+	}
 }
 
-static char		**fill_new(char **new_old, char **to_add, int i, int j)
+static void			free_pile(t_list_new *pile_a)
 {
-	char		**new_new;
+	t_list_new		*temp;
 
-	if (!(new_new = (char**)ft_memalloc(sizeof(char*) * ((nb_arg(to_add))
-						+ nb_arg(new_old) + 2))))
+	temp = pile_a;
+	while (temp)
+	{
+		pile_a = temp;
+		temp = pile_a->next;
+		free(pile_a);
+		pile_a = NULL;
+	}
+	free(temp);
+}
+
+static char			**fill_new(t_list_new **pile)
+{
+	int				i;
+	char			**dest;
+	t_list_new		*temp;
+
+	temp = *pile;
+	if (!(dest = (char**)ft_memalloc(sizeof(char*) * (nb_node_new(temp) + 2))))
 		return (NULL);
-	if (new_old != NULL)
+	i = nb_node_new(temp);
+	while (i >= -1)
 	{
-		while (new_old[i] != NULL)
-		{
-			new_new[i] = ft_strdup(new_old[i]);
-			i++;
-		}
+		dest[i + 1] = NULL;
+		i--;
 	}
-	while (to_add[j] != NULL)
+	i = nb_node_new(temp);
+	dest[i + 1] = NULL;
+	while (temp)
 	{
-		if (!(new_new[i] = (char*)ft_memalloc(sizeof(char)
-						* (ft_strlen(to_add[j]) + 1))))
-			return (NULL);
-		new_new[i] = ft_strdup(to_add[j]);
-		j++;
-		i++;
+		dest[i] = ft_strdup(temp->content);
+		temp = temp->next;
+		i--;
 	}
-	new_new[i] = NULL;
-	// free(new_old);
-	return (new_new);
+	return (dest);
 }
 
-char			**split_av(char **av)
+static void			free_split(char **split)
 {
-	int			i;
-	char		**new;
-	char		**split;
+	int				i;
+
+	i = 0;
+	while (split[i] != NULL)
+	{
+		free(split[i]);
+		split[i] = NULL;
+		i++;
+	}
+	free(split);
+}
+
+/*
+**	On met tous les arguments dans une liste chainee
+**	On passe cette liste chainee dans un tableau et on return
+*/
+
+char				**split_av(char **av)
+{
+	int				i;
+	char			**new;
+	char			**split;
+	t_list_new		*pile;
 
 	i = 1;
 	new = NULL;
 	split = NULL;
+	pile = NULL;
 	while (av[i] != NULL)
 	{
-		split = ft_split_whitespaces(av[i]);
-		new = fill_new(new, split, 0, 0);
+		if (!(split = ft_split_whitespaces(av[i])))
+			return (NULL);
+		fill_list_av(split, &pile);
 		i++;
 	}
-	// free(split);
+	new = fill_new(&pile);
+	i = 0;
+	free_pile(pile);
+	free_split(split);
 	return (new);
 }

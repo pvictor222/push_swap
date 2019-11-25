@@ -33,15 +33,21 @@ int			sort_pile(t_list_ps **pile_a, t_list_ps **pile_b, int mode)
 	int		nb_actions;
 
 	nb_actions = 0;
+	algo = NULL;
 	while (get_next_line(0, &algo) == 1)
 	{
 		i = 0;
 		if (check_algo(algo) < 1)
+		{
+			free(algo);
 			return (-1);
+		}
 		while (strcmp(g_function[i].c, algo) != 0)
 			i++;
 		g_function[i].ft(pile_a, pile_b);
 		nb_actions++;
+		free(algo);
+		algo = NULL;
 	}
 	if (mode == 3 || mode == 5 || mode == 6 || mode == 7)
 	{

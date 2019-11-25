@@ -4,17 +4,20 @@ SRCDIR	= ./src
 OBJDIR	= ./obj
 
 # src / obj files
-SRC		= checker.c		\
-		get_pile.c		\
-		ft_lstadd.c		\
-		ft_lstnew.c		\
-		swap.c			\
-		push.c			\
-		rotate.c		\
-		rev_rotate.c	\
-		sort_pile.c		\
-		check_error.c	\
-		split_av.c		\
+SRC		= checker.c				\
+		get_pile.c				\
+		ft_lstadd_checker.c		\
+		ft_lstnew_checker.c		\
+		swap.c					\
+		push.c					\
+		nb_node.c				\
+		rotate.c				\
+		rev_rotate.c			\
+		free_pile.c				\
+		free_str_tab.c			\
+		sort_pile.c				\
+		check_error.c			\
+		split_av.c				\
 		check_sort.c
 
 OBJ		= $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
