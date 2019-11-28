@@ -49,6 +49,7 @@ int					main(int ac, char **av)
 
 	if (ac > 1)
 	{
+		pile_a = NULL;
 		pile_b = NULL;
 		if (!(new_av = split_av(av)) || ft_check_error(new_av, -1) < 1)
 		{

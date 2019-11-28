@@ -39,6 +39,7 @@ static void			free_pile(t_list_new *pile_a)
 		pile_a = NULL;
 	}
 	free(temp);
+	temp = NULL;
 }
 
 static char			**fill_new(t_list_new **pile)
@@ -67,19 +68,20 @@ static char			**fill_new(t_list_new **pile)
 	return (dest);
 }
 
-static void			free_split(char **split)
-{
-	int				i;
+// static void			free_split(char **split)
+// {
+// 	int				i;
 
-	i = 0;
-	while (split[i] != NULL)
-	{
-		free(split[i]);
-		split[i] = NULL;
-		i++;
-	}
-	free(split);
-}
+// 	i = 0;
+// 	while (split[i] != NULL)
+// 	{
+// 		free(split[i]);
+// 		split[i] = NULL;
+// 		i++;
+// 	}
+// 	free(split);
+// 	split = NULL;
+// }
 
 /*
 **	On met tous les arguments dans une liste chainee
@@ -102,11 +104,14 @@ char				**split_av(char **av)
 		if (!(split = ft_split_whitespaces(av[i])))
 			return (NULL);
 		fill_list_av(split, &pile);
+		// free_split(split);
+		split = NULL;
 		i++;
 	}
 	new = fill_new(&pile);
 	i = 0;
 	free_pile(pile);
-	free_split(split);
+	// free_split(split);
+	// split = NULL;
 	return (new);
 }
