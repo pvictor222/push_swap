@@ -18,6 +18,7 @@ static int		find_decile_min(t_list_ps **pile_a)
 	int			min;
 
 	temp = *pile_a;
+	min = temp->content;
 	while (temp)
 	{
 		if (temp->content < min)

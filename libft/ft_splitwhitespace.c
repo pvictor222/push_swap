@@ -52,8 +52,7 @@ void		ft_strdup_split(char *src, char ***tab, int j)
 	int		len;
 
 	len = ft_length_word(src);
-	(*(tab))[j] = (char*)ft_memalloc(sizeof(char) * (len + 1));
-	if (!*(tab)[j])
+	if (!((*(tab))[j] = (char*)ft_memalloc(sizeof(char) * (len + 1))))
 		return ;
 	i = 0;
 	while (i <= len)
