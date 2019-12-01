@@ -20,9 +20,11 @@ void				free_new_av(char **new_av)
 	while (new_av[i])
 	{
 		free(new_av[i]);
+		new_av[i] = NULL;
 		i++;
 	}
 	free(new_av);
+	new_av = NULL;
 }
 
 static void			free_pile(t_list_ps *pile_a)

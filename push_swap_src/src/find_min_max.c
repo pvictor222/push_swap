@@ -18,6 +18,7 @@ int				find_max(t_list_ps **pile_a)
 	int			max;
 
 	temp = *pile_a;
+	max = temp->content;
 	while (temp)
 	{
 		if (temp->content > max)

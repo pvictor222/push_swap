@@ -29,7 +29,7 @@ t_list_new		*ft_lstnew_new(char *content)
 
 	if (!(buf = (t_list_new*)ft_memalloc(sizeof(t_list_new))))
 		return (NULL);
-	buf->content = content;
+	buf->content = ft_strdup(content);
 	buf->next = (t_list_new*)NULL;
 	return (buf);
 }

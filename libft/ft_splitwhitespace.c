@@ -52,7 +52,8 @@ void		ft_strdup_split(char *src, char ***tab, int j)
 	int		len;
 
 	len = ft_length_word(src);
-	if (!(((*(tab))[j]) = (char*)ft_memalloc(sizeof(char) * (len + 2))))
+	(*(tab))[j] = (char*)ft_memalloc(sizeof(char) * (len + 1));
+	if (!*(tab)[j])
 		return ;
 	i = 0;
 	while (i <= len)
@@ -67,7 +68,6 @@ void		ft_strdup_split(char *src, char ***tab, int j)
 		i++;
 	}
 	((*(tab))[j])[i] = '\0';
-	// return (dest);
 }
 
 char	**ft_split_whitespaces(char *str)
@@ -78,8 +78,8 @@ char	**ft_split_whitespaces(char *str)
 	int		j;
 
 	len = ft_number_words(str);
-	tab = (char**)ft_memalloc(sizeof(char*) * (len + 2));
-	tab[len] = NULL;
+	if (!(tab = (char**)ft_memalloc(sizeof(char*) * (len + 1))))
+		return (NULL);
 	i = 0;
 	j = 0;
 	while (str[i] != '\0')
