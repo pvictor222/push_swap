@@ -82,7 +82,7 @@ int			ft_check_error_checker(char **av1, int i)
 	if (doublons(av2, nb_arg_av(av1)) != 1)
 	{
 		free_avs(av2, av3);
-		return (-1);
+		return (-2);
 	}
 	free_avs(av2, av3);
 	return (1);

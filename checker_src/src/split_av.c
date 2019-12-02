@@ -12,20 +12,6 @@
 
 #include "checker.h"
 
-static void			fill_list_av(char **split, t_list_new **pile)
-{
-	int				i;
-	t_list_new		*new;
-
-	i = 0;
-	while (split[i] != NULL)
-	{
-		new = ft_lstnew_new_checker(split[i]);
-		ft_lstadd_new_checker(pile, new);
-		i++;
-	}
-}
-
 static void			free_pile(t_list_new *pile_a)
 {
 	t_list_new		*temp;
@@ -34,11 +20,29 @@ static void			free_pile(t_list_new *pile_a)
 	while (temp)
 	{
 		pile_a = temp;
+		free(pile_a->content);
 		temp = pile_a->next;
 		free(pile_a);
 		pile_a = NULL;
 	}
 	free(temp);
+	temp = NULL;
+}
+
+static void			fill_list_av(char **split, t_list_new **pile)
+{
+	int				i;
+	t_list_new		*new;
+
+	i = 0;
+	new = NULL;
+	while (split[i] != NULL)
+	{
+		new = ft_lstnew_new(split[i]);
+		ft_lstadd_new(pile, new);
+		i++;
+		new = NULL;
+	}
 }
 
 static char			**fill_new(t_list_new **pile)
@@ -72,13 +76,14 @@ static void			free_split(char **split)
 	int				i;
 
 	i = 0;
-	while (split[i] != NULL)
+	while (split[i])
 	{
 		free(split[i]);
 		split[i] = NULL;
 		i++;
 	}
 	free(split);
+	split = NULL;
 }
 
 /*
@@ -102,11 +107,12 @@ char				**split_av(char **av)
 		if (!(split = ft_split_whitespaces(av[i])))
 			return (NULL);
 		fill_list_av(split, &pile);
+		free_split(split);
+		split = NULL;
 		i++;
 	}
 	new = fill_new(&pile);
 	i = 0;
 	free_pile(pile);
-	free_split(split);
 	return (new);
 }

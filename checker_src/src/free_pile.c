@@ -16,12 +16,16 @@ void				free_pile(t_list_ps **pile)
 {
 	t_list_ps		*temp;
 
-	temp = *pile;
-	while (temp)
+	if (*pile)
 	{
-		*pile = temp;
-		temp = temp->next;
-		free(*pile);
+		temp = *pile;
+		while (temp != NULL)
+		{
+			*pile = temp;
+			temp = temp->next;
+			free(*pile);
+			*pile = NULL;
+		}
 	}
 }
 

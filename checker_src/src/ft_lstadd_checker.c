@@ -12,7 +12,7 @@
 
 #include "checker.h"
 
-void	ft_lstadd_ps_checker(t_list_ps **alst, t_list_ps *new)
+void	ft_lstadd_ps(t_list_ps **alst, t_list_ps *new)
 {
 	if ((new != NULL))
 	{
@@ -21,7 +21,7 @@ void	ft_lstadd_ps_checker(t_list_ps **alst, t_list_ps *new)
 	}
 }
 
-void	ft_lstadd_new_checker(t_list_new **alst, t_list_new *new)
+void	ft_lstadd_new(t_list_new **alst, t_list_new *new)
 {
 	if ((new != NULL))
 	{

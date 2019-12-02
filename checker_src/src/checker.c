@@ -17,6 +17,8 @@ static int		check_trim(char *str)
 	int			i;
 
 	i = -1;
+	if (!str || !str[0])
+		return (-1);
 	while (str[++i])
 		if (str[i] != ' ')
 			return (1);
@@ -164,33 +166,31 @@ int				main(int ac, char **av)
 		pile_b = NULL;
 		if (!(new_av = split_av(av)))
 		{
-			ft_putendl((mode == 0) ? "Error" : "Error: invalid arguments");
+			ft_putendl("Error");
 			free(new_av);
 			return (0);
 		}
-		else if (check_trim(av[1]) != -1 && (mode = is_option(new_av[0])) >= 1) {
+		else if (check_trim(av[1]) != -1 && (mode = is_option(new_av[0])) >= 1)
 			new_av = verbose_av(new_av);
-		}
-		if (ft_check_error_checker(new_av, -1) == -1) {
-			ft_putendl((mode == 0) ? "Error" : "Error: arguments must be numbers");
-		}
-		else if (ft_check_error_checker(new_av, -1) == -2) {
-			ft_putendl((mode == 0) ? "Error" : "Error: repeated arguments");
-		}
+		if (ft_check_error_checker(new_av, -1) == -1)
+			ft_putendl((mode <= 0) ? "Error" : "Error: arguments must be numbers");
+		else if (ft_check_error_checker(new_av, -1) == -2)
+			ft_putendl((mode <= 0) ? "Error" : "Error: repeated arguments");
 		else if (!(pile_a = get_pile_a_checker(new_av)) || sort_pile(&pile_a, &pile_b, mode) < 1)
-			ft_putendl((mode == 0) ? "Error" : "Error: wrong instructions");
+		{
+			ft_putendl((mode <= 0) ? "Error" : "Error: wrong instructions");
+			free_piles(&pile_a, &pile_b);
+		}
 		else
 		{
 			if (mode == 2 || mode == 4 || mode == 6 || mode == 7)
 				print_pile(new_av);
-			if (ft_check_sort(&pile_a, &pile_b) >= 1) {
+			if (ft_check_sort(&pile_a, &pile_b) >= 1)
 				ft_putendl("OK");
-			}
-			else {
+			else
 				ft_putendl("KO");
-			}
+			free_piles(&pile_a, &pile_b);
 		}
-		free_piles(&pile_a, &pile_b);
 		free_str_tab(new_av);
 	}
 	return (0);

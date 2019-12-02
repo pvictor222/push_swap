@@ -23,8 +23,8 @@ void			get_pile_a(char **av, t_list_ps **pile_a)
 		i++;
 	while (--i >= 0)
 	{
-		new = ft_lstnew_ps_checker(ft_atoi(av[i]));
-		ft_lstadd_ps_checker(pile_a, new);
+		new = ft_lstnew_ps(ft_atoi(av[i]));
+		ft_lstadd_ps(pile_a, new);
 	}
 }
 
@@ -40,8 +40,8 @@ t_list_ps		*get_pile_a_checker(char **av)
 		i++;
 	while (--i >= 0)
 	{
-		new = ft_lstnew_ps_checker(ft_atoi(av[i]));
-		ft_lstadd_ps_checker(&pile, new);
+		new = ft_lstnew_ps(ft_atoi(av[i]));
+		ft_lstadd_ps(&pile, new);
 	}
 	return (pile);
 }

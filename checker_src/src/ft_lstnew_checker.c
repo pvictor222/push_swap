@@ -12,7 +12,7 @@
 
 #include "checker.h"
 
-t_list_ps		*ft_lstnew_ps_checker(int content)
+t_list_ps		*ft_lstnew_ps(int content)
 {
 	t_list_ps	*buf;
 
@@ -23,13 +23,13 @@ t_list_ps		*ft_lstnew_ps_checker(int content)
 	return (buf);
 }
 
-t_list_new		*ft_lstnew_new_checker(char *content)
+t_list_new		*ft_lstnew_new(char *content)
 {
 	t_list_new	*buf;
 
 	if (!(buf = (t_list_new*)ft_memalloc(sizeof(t_list_new))))
 		return (NULL);
-	buf->content = content;
+	buf->content = ft_strdup(content);
 	buf->next = (t_list_new*)NULL;
 	return (buf);
 }

@@ -90,15 +90,15 @@ void					free_str_tab(char **str);
 **	ft_lstadd.c
 */
 
-void					ft_lstadd_ps_checker(t_list_ps **alst, t_list_ps *new);
-void					ft_lstadd_new_checker(t_list_new **alst, t_list_new *new);
+void					ft_lstadd_ps(t_list_ps **alst, t_list_ps *new);
+void					ft_lstadd_new(t_list_new **alst, t_list_new *new);
 
 /*
 **	ft_lstnew.c
 */
 
-t_list_ps				*ft_lstnew_ps_checker(int content);
-t_list_new				*ft_lstnew_new_checker(char *content);
+t_list_ps				*ft_lstnew_ps(int content);
+t_list_new				*ft_lstnew_new(char *content);
 
 /*
 **	nb_node.c

@@ -19,8 +19,11 @@ static void		push_piles(t_list_ps **dest, t_list_ps **src)
 	if (!src || !*src)
 		return ;
 	temp = *src;
-	*src = (*src)->next;
-	ft_lstadd_ps_checker(dest, temp);
+	if (!(*src)->next)
+		*src = NULL;
+	else
+		*src = (*src)->next;
+	ft_lstadd_ps(dest, temp);
 }
 
 void			ft_pa(t_list_ps **pile_a, t_list_ps **pile_b)

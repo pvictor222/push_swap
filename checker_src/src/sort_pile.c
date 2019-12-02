@@ -18,8 +18,10 @@ static int	check_algo(char *algo)
 	int		i;
 
 	i = 0;
+	if (ft_strcmp(algo, "") == 0)
+		return (0);
 	while (i < 12) {
-		if (strcmp(g_function[i].c, algo) == 0)
+		if (ft_strcmp(g_function[i].c, algo) == 0)
 			return (1);
 		i++;
 	}
