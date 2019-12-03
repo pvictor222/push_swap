@@ -30,13 +30,6 @@ void			sort_small(t_list_ps **pile_a, t_list_ps **pile_b, char **prev)
 {
 	while (ft_check_sort(pile_a, pile_b) != 1)
 	{
-		if (ft_check_sort(&((*pile_a)->next->next), pile_b) == 1
-				&& (*pile_a)->content < (*pile_a)->next->next->content
-				&& (*pile_a)->next->content < (*pile_a)->next->next->content)
-		{
-			sort_two(pile_a, pile_b, prev);
-			return ;
-		}
 		while (nb_node(*pile_a) > 3)
 			empty_last_a(pile_a, pile_b, prev);
 		sort_three(pile_a, pile_b, prev);

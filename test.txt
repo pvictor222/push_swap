@@ -1,0 +1,66 @@
+****** 1. CHECKER _ GESTION DES ERREURS ******
+
+./checker
+valgrind --leak-check=yes ./checker
+./checker 2147483648
+valgrind --leak-check=yes ./checker 2147483648
+./checker -2147483649
+valgrind --leak-check=yes ./checker -2147483649
+./checker -2 1 1
+valgrind --leak-check=yes ./checker -2 1 1 || idem avec espaces
+./checker  0 1 2 3 4 5 6 --> puis ss rr rrr pa
+valgrind --leak-check=yes ./checker  0 1 2 3 4 5 6 --> puis ss rr rrr pa || idem avec espaces
+./checker /dev/random
+valgrind --leak-check=yes ./checker /dev/random
+
+****** 2. CHECKER _ TESTS FAUX ******
+
+./checker 0 9 8 5 6 4 7 1 --> puis rien || puis rrr rr ss pa pb
+valgrind --leak-check=yes ./checker 0 1 2 --> puis rien || puis rrr rr ss pa pb
+
+****** 3. CHECKER _ TESTS VRAIS ******
+
+./checker 0 1 2 --> puis rien || puis rrr rr ss ss pa
+valgrind --leak-check=yes ./checker 0 1 2 --> puis rien || puis rrr rr ss ss pa
+./checker 0 9 1 8 2 --> puis pb ra pb ra sa ra pa pa
+valgrind --leak-check=yes ./checker 0 9 1 8 2 --> puis pb ra pb ra sa ra pa pa
+
+****** 4. PUSH_SWAP _ TESTS IDENTITE ******
+
+./push_swap 
+valgrind --leak-check=yes ./push_swap
+./push_swap 42
+valgrind --leak-check=yes ./push_swap 42
+./push_swap 0 1 2
+valgrind --leak-check=yes ./push_swap 0 1 2
+./push_swap 0 1 2 3 4 5 6 7 8 9
+valgrind --leak-check=yes ./push_swap 0 1 2 3 4 5 6 7 8 9
+
+****** 5. PUSH_SWAP _ VERSION SIMPLE ******
+
+ARG="2 1 0" ; ./push_swap $ARG | ./checker -c $ARG
+ARG=`ruby -e "puts (0..2).to_a.shuffle.join(' ')"` ; ./push_swap $ARG | ./checker -pc $ARG
+
+****** 6. PUSH_SWAP _ VERSION TOUTE AUSSI SIMPLE ******
+
+ARG=`ruby -e "puts (1..5).to_a.shuffle.join(' ')"` ; ./push_swap $ARG | ./checker -pc $ARG
+ARG=`ruby -e "puts (1..5).to_a.shuffle.join(' ')"` ; ./push_swap $ARG | valgrind --leak-check=yes ./checker -pc $ARG
+ARG=`ruby -e "puts (1..5).to_a.shuffle.join(' ')"` ; valgrind --leak-check=yes ./push_swap $ARG | ./checker -pc $ARG
+ARG="2 1 3 4 5" ; valgrind --leak-check=yes ./push_swap $ARG | ./checker $ARG
+
+****** 7. PUSH_SWAP _ VERSION INTERMEDIAIRE ******
+
+ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"` ; ./push_swap $ARG | ./checker -pc $ARG
+ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"` ; ./push_swap $ARG | valgrind --leak-check=yes ./checker -pc $ARG
+ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"` ; valgrind --leak-check=yes ./push_swap $ARG | ./checker -pc $ARG
+
+****** 8. PUSH_SWAP _ VERSION AVANCEE ******
+
+ARG=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"` ; ./push_swap $ARG | ./checker -pc $ARG
+ARG=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"` ; ./push_swap $ARG | valgrind --leak-check=yes ./checker -pc $ARG
+ARG=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"` ; valgrind --leak-check=yes ./push_swap $ARG | ./checker -pc $ARG
+
+****** BONUS ******
+
+ARG=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"` ; ./push_swap $ARG | ./checker -pvch $ARG
+ARG=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"` ; ./push_swap $ARG | valgrind --leak-check=yes ./checker -pvch $ARG

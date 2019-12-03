@@ -20,7 +20,8 @@ static int	check_algo(char *algo)
 	i = 0;
 	if (ft_strcmp(algo, "") == 0)
 		return (0);
-	while (i < 12) {
+	while (i < 12)
+	{
 		if (ft_strcmp(g_function[i].c, algo) == 0)
 			return (1);
 		i++;
@@ -28,13 +29,12 @@ static int	check_algo(char *algo)
 	return (0);
 }
 
-int			sort_pile(t_list_ps **pile_a, t_list_ps **pile_b, int mode)
+int			sort_pile(t_list_ps **pile_a, t_list_ps **pile_b, int mode,
+			int nb_actions)
 {
 	char	*algo;
 	int		i;
-	int		nb_actions;
 
-	nb_actions = 0;
 	algo = NULL;
 	while (get_next_line(0, &algo) == 1)
 	{

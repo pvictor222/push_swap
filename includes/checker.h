@@ -27,7 +27,7 @@ typedef struct			s_list_ps
 
 typedef struct			s_list_new
 {
-	char*				content;
+	char				*content;
 	struct s_list_new	*next;
 }						t_list_new;
 
@@ -71,8 +71,7 @@ int						ft_check_error_checker(char **av1, int i);
 */
 
 int						sort_pile(t_list_ps **pile_a, t_list_ps **pile_b,
-						int mode);
-
+						int mode, int nb_actions);
 
 /*
 **	free_pile.c
@@ -101,10 +100,23 @@ t_list_ps				*ft_lstnew_ps(int content);
 t_list_new				*ft_lstnew_new(char *content);
 
 /*
+**	nb_elem.c
+*/
+
+int						nb_elem(char **tab);
+
+/*
 **	nb_node.c
 */
 
 int						nb_node_new(t_list_new *pile_a);
+
+/*
+**	print.c
+*/
+
+void					print_help();
+void					print_pile(char **av);
 
 /*
 **	get_pile.c

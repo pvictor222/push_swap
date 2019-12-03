@@ -28,7 +28,7 @@ typedef struct			s_list_ps
 
 typedef struct			s_list_new
 {
-	char*				content;
+	char				*content;
 	struct s_list_new	*next;
 }						t_list_new;
 

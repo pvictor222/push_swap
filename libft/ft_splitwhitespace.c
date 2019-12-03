@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int		ft_number_words(char *str)
+int			ft_number_words(char *str)
 {
 	int		i;
 	int		j;
@@ -36,12 +36,13 @@ int		ft_number_words(char *str)
 	return (j);
 }
 
-int		ft_length_word(char *str)
+int			ft_length_word(char *str)
 {
 	int		i;
 
 	i = 0;
-	while (str[i] && str[i] != '\0' && str[i] != '\n' && str[i] != ' ' && str[i] != '\t')
+	while (str[i] && str[i] != '\0' && str[i] != '\n' && str[i] != ' '
+		&& str[i] != '\t')
 		i++;
 	return (i);
 }
@@ -69,15 +70,14 @@ void		ft_strdup_split(char *src, char ***tab, int j)
 	((*(tab))[j])[i] = '\0';
 }
 
-char	**ft_split_whitespaces(char *str)
+char		**ft_split_whitespaces(char *str)
 {
-	int		len;
 	char	**tab;
 	int		i;
 	int		j;
 
-	len = ft_number_words(str);
-	if (!(tab = (char**)ft_memalloc(sizeof(char*) * (len + 1))))
+	if (!(tab = (char**)ft_memalloc(sizeof(char*)
+		* (ft_number_words(str) + 1))))
 		return (NULL);
 	i = 0;
 	j = 0;

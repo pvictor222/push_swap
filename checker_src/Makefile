@@ -11,7 +11,9 @@ SRC		= checker.c				\
 		swap.c					\
 		push.c					\
 		nb_node.c				\
+		print.c					\
 		rotate.c				\
+		nb_elem.c				\
 		rev_rotate.c			\
 		free_pile.c				\
 		free_str_tab.c			\
